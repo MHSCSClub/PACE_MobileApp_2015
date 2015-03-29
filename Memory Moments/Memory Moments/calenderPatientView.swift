@@ -18,7 +18,7 @@ class calenderPatientView: UIViewController {
     var calendar: NSCalendar!
     var components: NSDateComponents!
     var daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
-    var dayString = ["Sun" , "Mon", "Tue", "Wen","Thu","Fri","Sat"];
+    var dayString = ["Sun" , "Mon", "Tue", "Wed","Thu","Fri","Sat"];
     
     //screen demintions
     let screenSize: CGRect = UIScreen.mainScreen().bounds

@@ -32,6 +32,7 @@ class calenderPatientView: UIViewController {
         let dateText = "\(components.month)/\(components.day)/\(components.year)";
         currentDateText.text = dateText;
         makeCalendar()
+        
 
         // Do any additional setup after loading the view.
     }

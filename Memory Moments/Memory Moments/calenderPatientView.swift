@@ -56,14 +56,12 @@ class calenderPatientView: UIViewController {
     
         
         //Displays Days around the current day
-        var temp = 0;
         var day = components.day - (components.weekday-1);
-        
+        if(day < 1) {
+            day = daysInMonth[components.month - 2] + day - 1;
+        }
         for i in 0...13 {
-            if(day < 1) {
-                day = daysInMonth[components.month - 2] - temp;
-                temp++;
-            } else if(day > daysInMonth[components.month - 1]){
+            if(day > daysInMonth[components.month - 1]){
                 day = 1;
             }
             if(components.day == day) {

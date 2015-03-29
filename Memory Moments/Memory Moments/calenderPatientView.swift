@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Jack Phillips. All rights reserved.
 //
 
-//This is the main page class for the Pasient d
+//This is the main page class for the pacient calender
 
 import UIKit
 
@@ -63,8 +63,7 @@ class calenderPatientView: UIViewController {
             if(day < 1) {
                 day = daysInMonth[components.month - 2] - temp;
                 temp++;
-            }
-            else if(day > daysInMonth[components.month - 1]){
+            } else if(day > daysInMonth[components.month - 1]){
                 day = 1;
             }
             if(components.day == day) {
@@ -77,12 +76,11 @@ class calenderPatientView: UIViewController {
                 current.layer.borderColor = UIColor.blackColor().CGColor!;
                 current.text = "\(day)";
                 self.view.addSubview(current);
-            }
-            else{//print everyother day
+            } else { //print everyother day
                 //works to create the next line and to make sure that is starts from the begining
                 var a = 0;
                 var b = i;
-                if(i > 6){
+                if(i > 6) {
                     a = 1;
                     b -= 7;
                 }

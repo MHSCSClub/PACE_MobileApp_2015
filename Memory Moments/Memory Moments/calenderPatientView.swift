@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Jack Phillips. All rights reserved.
 //
 
+//This is the main page class for the Pasient d
+
 import UIKit
 
 class calenderPatientView: UIViewController {
@@ -50,7 +52,9 @@ class calenderPatientView: UIViewController {
             days.text = dayString[i];
             self.view.addSubview(days);
         }
-        //days before current day
+    
+        
+        //Displays Days around the current day
         var temp = 0;
         var day = components.day - (components.weekday-1);
         
@@ -73,14 +77,14 @@ class calenderPatientView: UIViewController {
                 current.text = "\(day)";
                 self.view.addSubview(current);
             }
-            else{
+            else{//print everyother day
+                //works to create the next line and to make sure that is starts from the begining
                 var a = 0;
                 var b = i;
                 if(i > 6){
                     a = 1;
                     b -= 7;
                 }
-                print("\(day)");
                 var days = UILabel(frame: CGRect(x: (CGFloat(b) * screenWidth * CGFloat(0.1428)), y: (CGFloat(120) + (CGFloat(50) * CGFloat(a))), width: (CGFloat(screenWidth) * CGFloat(0.1428)), height: 50));
                 days.layer.borderWidth = 0.5;
                 days.textAlignment = NSTextAlignment.Center;

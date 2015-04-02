@@ -5,13 +5,14 @@ On startup:
 The app needs to communicate with the server. Send a POST request with (for now):
 	usertype = 'patient' / 'caretaker'
 To /createuser.php
-The server will create a user and send back just the userid
+The server will create a user and send back just the userid (not in JSON format)
 You should store the userid locally
 
 If the user is a patient, you should display the userid
 If the user is a caretaker, you should give them an option to enter the userid
 After entering the patient userid, send another POST request with (for now):
-	pid = the user id
+	pid = the patinet user id
+	cid = your user id
 To /linkpatient.php
 
 On update:
@@ -22,20 +23,21 @@ Events:
 Send a POST request with:
 	pid = stored patient id
 To /updateevents.php
-The server will return, in the following format, all events with the matching pid:
+The server will return, in the following format, all events in JSON format with the matching pid:
 
-Datetime EventID Eventtype
-...       ....     ....
+evtid = event id 
+time = date and time 
+type = type of event
+descrition = description 
 
 Now you have all created events
 
 To get the flashcards on an event, you must send a POST request with:
-	eid = event id
+	evtid = event id
 To /getflashcards.php
-The server will return, in the following format, the flash card IDS (not the actual cards) in the following format:
+The server will return, in the following format, the flash card IDS (not the actual cards) in the JSON format:
 
-fid
-...
+fcid: flash card id
 
 Flashcards:
 Of course, this is useless without the actual flashcards. However flashcards are expensive (images), so store a local version on you phont
@@ -46,10 +48,10 @@ Send a POST request with:
 	pid = patient id
 	fid = greatest current flashcard id
 To /updateflashcards.php
-The server will return:
+The server will return (in JSON):
 
-id other info
-..  ........
+fcid: flashcard id
+other info
 
 Store the greatest id you recieve
 
@@ -59,9 +61,26 @@ Get all your patient ids, update like you would each patient.
 Get all patient ids, send a POST request with:
 	cid = caretaker id
 To /getpatients.php
-You will receive all patient ids in the following format:
+You will receive all patient ids in the JSON format:
 
-pid
-...
+pid: patient id
 
+Creation (caretaker only):
 
+New events:
+To create new events, you must send the following in a POST request:
+	pid = patient id
+	time = date and time
+	type = type of event
+	description = description of event
+Flashcards associated with the event will be passed like this:
+	fclen = # of flashcards
+	fc0 ... fclen - 1: id of each flashcard
+To /createevent.php
+
+New flashcards:
+To create new flashcards, send the following in a POST request:
+	pid = patient id
+	data
+To /createflashcard.php
+Server will return the highest indexed flashcard, not in JSON format

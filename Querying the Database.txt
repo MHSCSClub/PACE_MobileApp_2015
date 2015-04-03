@@ -1,3 +1,7 @@
+Your request should go to:
+
+http://aakatz3.asuscomm.com:8085/mobile/
+
 What your app needs to do for the backend:
 
 On startup:
@@ -11,7 +15,7 @@ You should store the userid locally
 If the user is a patient, you should display the userid
 If the user is a caretaker, you should give them an option to enter the userid
 After entering the patient userid, send another POST request with (for now):
-	pid = the patinet user id
+	pid = the patient user id
 	cid = your user id
 To /linkpatient.php
 
@@ -46,7 +50,7 @@ the flashcards with pid matching your pid and id greater than current.
 
 Send a POST request with:
 	pid = patient id
-	fid = greatest current flashcard id
+	fcid = greatest current flashcard id
 To /updateflashcards.php
 The server will return (in JSON):
 
@@ -84,3 +88,4 @@ To create new flashcards, send the following in a POST request:
 	data
 To /createflashcard.php
 Server will return the highest indexed flashcard, not in JSON format
+

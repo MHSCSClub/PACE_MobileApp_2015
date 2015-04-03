@@ -8,8 +8,8 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:name=".ActivityChooser"
+            android:label="@string/title_activity_activity_chooser" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,8 +17,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CalanderScreen"
-            android:label="@string/title_activity_calander_screen" >
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
         </activity>
     </application>
 

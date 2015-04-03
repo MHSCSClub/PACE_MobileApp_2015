@@ -3,7 +3,6 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_calander_screen">CalanderScreen</string>
     <string-array name="sports_array">
         <item>Shuttle Badminton</item>
         <item>Tennis</item>
@@ -13,4 +12,5 @@
         <item>Chess</item>
         <item>Hockey</item>
     </string-array>
+    <string name="title_activity_activity_chooser">ActivityChooser</string>
 </resources>

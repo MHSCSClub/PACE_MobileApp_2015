@@ -9,9 +9,15 @@
 //This is the main page class for the pacient calender
 
 import UIKit
+import CoreData
 
-class calenderPatientView: UIViewController {
+class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    var Events = [MainData]()
+    // Retreive the managedObjectContext from AppDelegate
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+    var logTableView = UITableView(frame: CGRectZero, style: .Plain)
+    
     @IBOutlet var currentDateText: UILabel! //Var for current date box
     //vars for the date
     var date: NSDate!
@@ -25,6 +31,44 @@ class calenderPatientView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Use optional binding to confirm the managedObjectContext
+        
+        if let moc = self.managedObjectContext {
+            /*
+            //ONLY FOR MAKING TEST DATA HERE WERE WE WANT TO PULL NEW DATA EVEYTIME
+            let dateString = "2015-10-09 17:57"
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm"
+            formatter.timeZone = NSTimeZone(name: "Asia/Dubai")
+            let date = formatter.dateFromString(dateString)
+            var items = [
+                (100, date, "Don't Care", "This is test4", "Test_Title4"),
+            ]
+            
+            // Loop through, creating items
+            for (ID, DATE, TYPE, Dis, Title) in items {
+                // Create an individual item
+                MainData.createInManagedObjectContext(moc, evtid: ID, time: DATE!, type: TYPE, descrition: Dis, Title: Title)
+            }
+            save()
+        */
+            var viewFrame = self.view.frame
+            //Sets up the Table View
+            viewFrame.origin.y += 260
+            logTableView.frame = viewFrame
+            logTableView.scrollEnabled = false;
+            logTableView.rowHeight = 90;
+            // Add the table view to this view controller's view
+            self.view.addSubview(logTableView)
+            // Here, we tell the table view that we intend to use a cell we're going to call "LogCell"
+            logTableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "LogCell")
+            
+            // This tells the table view that it should get it's data from this class, ViewController
+            logTableView.dataSource = self
+            logTableView.dataSource = self
+            logTableView.delegate = self
+            fetchLog()
+        }
         //gets current date
         date = NSDate()
         calendar = NSCalendar.currentCalendar()
@@ -32,10 +76,62 @@ class calenderPatientView: UIViewController {
         let dateText = "\(components.month)/\(components.day)/\(components.year)";
         currentDateText.text = dateText;
         makeCalendar()
+        save()
+        
+
         
 
         // Do any additional setup after loading the view.
     }
+    //Gets the data from Core Data
+    func fetchLog() {
+        let fetchRequest = NSFetchRequest(entityName: "MainData")
+        
+        // Create a sort descriptor object that sorts on the "title"
+        // property of the Core Data object
+        let sortDescriptor = NSSortDescriptor(key: "time", ascending: true)
+        
+        // Set the list of sort descriptors in the fetch request,
+        // so it includes the sort descriptor
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [MainData] {
+            Events = fetchResults
+        }
+    }
+    
+    // MARK: UITableViewDataSource
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // How many rows are there in this section?
+        // There's only 1 section, and it has a number of rows
+        // equal to the number of logItems, so return the count
+        return Events.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("LogCell") as UITableViewCell
+        
+        // Get the LogItem for this index
+        let envents = Events[indexPath.row]
+        
+        // Set the title of the cell to be the title of the logItem
+        cell.textLabel?.text = envents.title
+        return cell
+    }
+    
+    //Clicked Event going to next Page
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("EventViewController") as EventViewController
+        vc.passedData = Events[indexPath.row];
+        self.presentViewController(vc, animated: true, completion: nil)
+        
+    }
+    
+    
+    
+    //Calander
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -95,7 +191,12 @@ class calenderPatientView: UIViewController {
         
 
     }
-    
+    func save() {
+        var error : NSError?
+        if(managedObjectContext!.save(&error) ) {
+            println(error?.localizedDescription)
+        }
+    }
 
     /*
     // MARK: - Navigation

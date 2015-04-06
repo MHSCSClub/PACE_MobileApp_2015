@@ -15,6 +15,8 @@
 		3F9972321AC73F2E00EF05C9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F9972301AC73F2E00EF05C9 /* LaunchScreen.xib */; };
 		3F99723E1AC73F2E00EF05C9 /* Memory_MomentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F99723D1AC73F2E00EF05C9 /* Memory_MomentsTests.swift */; };
 		3F9972481AC7404A00EF05C9 /* calenderPatientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9972471AC7404A00EF05C9 /* calenderPatientView.swift */; };
+		3FBE1CE21AD328E2009030A0 /* MainData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBE1CE11AD328E2009030A0 /* MainData.swift */; };
+		3FC32CEA1AD33AE100432124 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC32CE91AD33AE100432124 /* EventViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,8 @@
 		3F99723C1AC73F2E00EF05C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F99723D1AC73F2E00EF05C9 /* Memory_MomentsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memory_MomentsTests.swift; sourceTree = "<group>"; };
 		3F9972471AC7404A00EF05C9 /* calenderPatientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = calenderPatientView.swift; sourceTree = "<group>"; };
+		3FBE1CE11AD328E2009030A0 /* MainData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainData.swift; sourceTree = "<group>"; };
+		3FC32CE91AD33AE100432124 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,9 +89,11 @@
 				3F9972291AC73F2D00EF05C9 /* ViewController.swift */,
 				3F99722B1AC73F2D00EF05C9 /* Main.storyboard */,
 				3F9972471AC7404A00EF05C9 /* calenderPatientView.swift */,
+				3FC32CE91AD33AE100432124 /* EventViewController.swift */,
 				3F99722E1AC73F2E00EF05C9 /* Images.xcassets */,
 				3F9972301AC73F2E00EF05C9 /* LaunchScreen.xib */,
 				3F9972261AC73F2D00EF05C9 /* Memory_Moments.xcdatamodeld */,
+				3FBE1CE11AD328E2009030A0 /* MainData.swift */,
 				3F9972221AC73F2D00EF05C9 /* Supporting Files */,
 			);
 			path = "Memory Moments";
@@ -218,10 +224,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FBE1CE21AD328E2009030A0 /* MainData.swift in Sources */,
 				3F99722A1AC73F2D00EF05C9 /* ViewController.swift in Sources */,
 				3F9972281AC73F2D00EF05C9 /* Memory_Moments.xcdatamodeld in Sources */,
 				3F9972481AC7404A00EF05C9 /* calenderPatientView.swift in Sources */,
 				3F9972251AC73F2D00EF05C9 /* AppDelegate.swift in Sources */,
+				3FC32CEA1AD33AE100432124 /* EventViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +423,7 @@
 				3F9972431AC73F2E00EF05C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3F9972441AC73F2E00EF05C9 /* Build configuration list for PBXNativeTarget "Memory MomentsTests" */ = {
 			isa = XCConfigurationList;
@@ -423,6 +432,7 @@
 				3F9972461AC73F2E00EF05C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

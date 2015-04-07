@@ -13,4 +13,9 @@
         <item>Hockey</item>
     </string-array>
     <string name="title_activity_activity_chooser">ActivityChooser</string>
+    <string name="title_activity_fashcards">Fashcards</string>
+    <string name="title_activity_flashcards_list">FlashcardsList</string>
+    <string name="title_activity_patient_event">PatientEvent</string>
+    <string name="title_activity_edit_new_card">EditNewCard</string>
+    <string name="title_activity_main_activity2">MainActivity2Activity</string>
 </resources>

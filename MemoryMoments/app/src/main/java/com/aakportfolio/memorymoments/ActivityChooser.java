@@ -48,25 +48,28 @@ public class ActivityChooser extends ActionBarActivity {
                 break;
             case R.id.button6:
                 //caregiver cal
-                //break;
+                break;
             case R.id.button7:
                 //patient cal
-                //break;
+                break;
             case R.id.button8:
                 //event care
-                //break;
+                break;
             case R.id.button9:
                 //flash list
-                //break;
+                intent = new Intent(this, FlashcardsList.class);
+                break;
             case R.id.button10:
                 //flashcard view
-                //break;
+                break;
             case R.id.button11:
                 //add flash
-                //break;
+                intent = new Intent(this, EditNewCard.class);
+                break;
             case R.id.button12:
                 //event patient
-                //break;
+                intent = new Intent(this, PatientEvent.class);
+                break;
             default:
                 Toast.makeText(this, ""+view.getId(), Toast.LENGTH_SHORT).show();
         }

@@ -20,6 +20,22 @@
             android:name=".MainActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name=".FlashcardsList"
+            android:label="@string/title_activity_flashcards_list" >
+        </activity>
+        <activity
+            android:name=".PatientEvent"
+            android:label="@string/title_activity_patient_event" >
+        </activity>
+        <activity
+            android:name=".EditNewCard"
+            android:label="@string/title_activity_edit_new_card" >
+        </activity>
+        <activity
+            android:name=".MainActivity2Activity"
+            android:label="@string/title_activity_main_activity2" >
+        </activity>
     </application>
 
 </manifest>

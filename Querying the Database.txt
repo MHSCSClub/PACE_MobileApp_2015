@@ -89,5 +89,6 @@ To create new flashcards, send the following in a POST request:
 	pid = patient id
 	data
 To /createflashcard.php
-Server will return the highest indexed flashcard, not in JSON format
+Server will return the highest indexed flashcard:
+	fcid: highest flashcard id
 

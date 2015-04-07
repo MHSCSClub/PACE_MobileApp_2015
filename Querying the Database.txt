@@ -51,7 +51,7 @@ the flashcards with pid matching your pid and id greater than current.
 Send a POST request with:
 	pid = patient id
 	fcid = greatest current flashcard id
-To /updateflashcards.php
+To /updateflashcard.php
 The server will return (in JSON):
 
 fcid: flashcard id

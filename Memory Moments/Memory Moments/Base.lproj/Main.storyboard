@@ -46,7 +46,7 @@
         <!--Calender Patient View-->
         <scene sceneID="Xh5-eK-oin">
             <objects>
-                <viewController id="div-dW-qcs" customClass="calenderPatientView" customModule="Memory_Moments" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" id="div-dW-qcs" customClass="calenderPatientView" customModule="Memory_Moments" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BfA-Mc-kk2"/>
                         <viewControllerLayoutGuide type="bottom" id="onq-YB-xAT"/>
@@ -93,7 +93,7 @@
         <!--Event View Controller-->
         <scene sceneID="iSg-QJ-buY">
             <objects>
-                <viewController storyboardIdentifier="EventViewController" id="EEn-ck-lYt" customClass="EventViewController" customModule="Memory_Moments" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EventViewController" modalTransitionStyle="crossDissolve" id="EEn-ck-lYt" customClass="EventViewController" customModule="Memory_Moments" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GGs-4Y-WHN"/>
                         <viewControllerLayoutGuide type="bottom" id="FQE-Rl-4us"/>

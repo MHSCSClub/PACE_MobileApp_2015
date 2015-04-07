@@ -6,13 +6,15 @@
 //  Copyright (c) 2015 Jack Phillips. All rights reserved.
 //
 
-//This is the main page class for the pacient calender
+//This is the main page class for the patient calender
 
 import UIKit
 import CoreData
+import Foundation
 
 class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    var NewEvents = [(Int(), NSDate(), String(), String(), String())];
     var Events = [MainData]()
     // Retreive the managedObjectContext from AppDelegate
     let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
@@ -34,30 +36,20 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
         // Use optional binding to confirm the managedObjectContext
         
         if let moc = self.managedObjectContext {
-            /*
-            //ONLY FOR MAKING TEST DATA HERE WERE WE WANT TO PULL NEW DATA EVEYTIME
-            let dateString = "2015-10-09 17:57"
-            let formatter = NSDateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd HH:mm"
-            formatter.timeZone = NSTimeZone(name: "Asia/Dubai")
-            let date = formatter.dateFromString(dateString)
-            var items = [
-                (100, date, "Don't Care", "This is test4", "Test_Title4"),
-            ]
+            postRequest()
             
-            // Loop through, creating items
-            for (ID, DATE, TYPE, Dis, Title) in items {
-                // Create an individual item
-                MainData.createInManagedObjectContext(moc, evtid: ID, time: DATE!, type: TYPE, descrition: Dis, Title: Title)
-            }
-            save()
-        */
+            //ONLY FOR MAKING TEST DATA HERE WERE WE WANT TO PULL NEW DATA EVEYTIME
+            
+            
+            
+          
+        
             var viewFrame = self.view.frame
             //Sets up the Table View
             viewFrame.origin.y += 260
             logTableView.frame = viewFrame
             logTableView.scrollEnabled = false;
-            logTableView.rowHeight = 90;
+            logTableView.rowHeight = 103;
             // Add the table view to this view controller's view
             self.view.addSubview(logTableView)
             // Here, we tell the table view that we intend to use a cell we're going to call "LogCell"
@@ -67,7 +59,9 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
             logTableView.dataSource = self
             logTableView.dataSource = self
             logTableView.delegate = self
-            fetchLog()
+            
+            // Loop through, creating items
+            
         }
         //gets current date
         date = NSDate()
@@ -76,7 +70,7 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
         let dateText = "\(components.month)/\(components.day)/\(components.year)";
         currentDateText.text = dateText;
         makeCalendar()
-        save()
+        //save()
         
 
         
@@ -98,6 +92,26 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
         if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [MainData] {
             Events = fetchResults
         }
+        
+    }
+    func pullInNewData() {
+        fetchLog()
+        for (ID, DATE, TYPE, Dis, Title) in NewEvents {
+            // Create an individual item
+            var used: Bool = false;
+            for event in Events {
+                if (event.evtid == ID){
+                    used = true;
+                }
+            }
+            if(!used){
+                MainData.createInManagedObjectContext(self.managedObjectContext!, evtid: ID, time: DATE, type: TYPE, descrition: Dis, Title: Title)
+            }
+        }
+        self.fetchLog()
+        logTableView.reloadData()
+        save()
+        
     }
     
     // MARK: UITableViewDataSource
@@ -131,7 +145,7 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
     
     
     
-    //Calander
+    //Calendar
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -170,7 +184,7 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
                 current.layer.borderColor = UIColor.blackColor().CGColor!;
                 current.text = "\(day)";
                 self.view.addSubview(current);
-            } else { //print everyother day
+            } else { //print every other day
                 //works to create the next line and to make sure that is starts from the begining
                 var a = 0;
                 var b = i;
@@ -194,9 +208,47 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
     func save() {
         var error : NSError?
         if(managedObjectContext!.save(&error) ) {
+            print("HERE")
             println(error?.localizedDescription)
         }
     }
+    
+    func postRequest() {
+        var url: NSURL = NSURL(string: "http://aakatz3.asuscomm.com:8085/mobile/updateevents.php")!
+        var request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
+        var bodyData = "pid=2"
+        request.HTTPMethod = "POST"
+        request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding);
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue())
+            {
+                (response, data, error) in
+                println("\(data)")
+                var arr: [AnyObject];
+                if let array = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(0), error: nil)  as? [AnyObject] {
+                    arr = array;
+                }else{
+                    arr = [];
+                }
+                
+                for event in arr {
+                    let evtid = event["evtid"] as Int;
+                    let dates = event["time"] as String;
+                    let formatter = NSDateFormatter()
+                    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                    formatter.timeZone = NSTimeZone(name: "Asia/Dubai")
+                    let date = formatter.dateFromString(dates)
+                    let type = event["type"] as String;
+                    let descrition = event["description"] as String;
+                    println("\(date)")
+                    self.NewEvents.append(evtid, date!, type, descrition, "No Title Item Yet");
+                }
+                self.NewEvents.removeAtIndex(0);
+                self.pullInNewData()
+                
+        }
+        
+    }
+}
 
     /*
     // MARK: - Navigation
@@ -208,4 +260,4 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
     }
     */
 
-}
+

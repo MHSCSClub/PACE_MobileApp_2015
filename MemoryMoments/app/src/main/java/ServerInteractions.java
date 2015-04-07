@@ -28,6 +28,6 @@ public class ServerInteractions {
 
         String resp = response.toString();
 
-        return resp.split("\\[")[1];
+        return resp;
     }
 }

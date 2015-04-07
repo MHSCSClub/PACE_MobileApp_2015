@@ -240,7 +240,7 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
                     let type = event["type"] as String;
                     let descrition = event["description"] as String;
                     println("\(date)")
-                    self.NewEvents.append(evtid, date!, type, descrition, "No Title Item Yet");
+                    self.NewEvents.append(evtid, date!, type, descrition, type);
                 }
                 self.NewEvents.removeAtIndex(0);
                 self.pullInNewData()

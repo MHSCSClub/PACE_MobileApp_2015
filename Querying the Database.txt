@@ -3,6 +3,8 @@ Your request should go to:
 http://aakatz3.asuscomm.com:8085/mobile/
 
 **New standard: EVERY reply is in JSON
+Also even if you recieve no response, it is good if the server status 200 OK, 
+in case of an error, the server will send back 500 server error
 
 What your app needs to do for the backend:
 

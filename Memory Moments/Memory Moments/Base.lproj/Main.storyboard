@@ -8,7 +8,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Memory_Moments" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="Memory_Moments" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -46,7 +46,7 @@
         <!--Calender Patient View-->
         <scene sceneID="Xh5-eK-oin">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" id="div-dW-qcs" customClass="calenderPatientView" customModule="Memory_Moments" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="calenderPatientView" modalTransitionStyle="crossDissolve" id="div-dW-qcs" customClass="calenderPatientView" customModule="Memory_Moments" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BfA-Mc-kk2"/>
                         <viewControllerLayoutGuide type="bottom" id="onq-YB-xAT"/>
@@ -121,6 +121,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="VDr-ha-QY0"/>
+        <segue reference="qyv-m9-UTv"/>
     </inferredMetricsTieBreakers>
 </document>

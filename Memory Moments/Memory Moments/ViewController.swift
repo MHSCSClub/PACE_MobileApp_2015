@@ -12,8 +12,13 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+    }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         let file = "setUpDone.txt"
-        /*
+        
         if let dirs : [String] = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String] {
             let dir = dirs[0] //documents directory
             let path = dir.stringByAppendingPathComponent(file);
@@ -21,18 +26,21 @@ class ViewController: UIViewController {
             
             //reading
             let text2 = String(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil)
+            println(text2)
             
             if(text2 == "Yes"){
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewControllerWithIdentifier("EventViewController") as EventViewController
-                self.presentViewController(vc, animated: true, completion: nil)
+                let vc = storyboard.instantiateViewControllerWithIdentifier("calenderPatientView") as UIViewController
+                self.presentViewController(vc, animated: false, completion: nil)
+            }else{
+                //Getting new UserID and does connection
             }
             
             //writing
             text.writeToFile(path, atomically: false, encoding: NSUTF8StringEncoding, error: nil);
             
-        // Do any additional setup after loading the view, typically from a nib.
-        }*/
+            // Do any additional setup after loading the view, typically from a nib.
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

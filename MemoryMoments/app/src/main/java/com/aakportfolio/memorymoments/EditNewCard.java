@@ -1,5 +1,6 @@
 package com.aakportfolio.memorymoments;
 
+import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -35,5 +36,13 @@ public class EditNewCard extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void saveButtonPressed(){
+        String type = getType();
+        String name = getName();
+        String info = getInfo();
+        Image pic = getPic();
+        FlashCard card = new FlashCard(type, name, info, pic);
     }
 }

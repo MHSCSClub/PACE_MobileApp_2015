@@ -2,6 +2,8 @@ Your request should go to:
 
 http://aakatz3.asuscomm.com:8085/mobile/
 
+**New standard: EVERY reply is in JSON
+
 What your app needs to do for the backend:
 
 On startup:
@@ -9,7 +11,7 @@ On startup:
 The app needs to communicate with the server. Send a POST request with (for now):
 	usertype = 'patient' / 'caretaker'
 To /createuser.php
-The server will create a user and send back just the userid (not in JSON format)
+The server will create a user and send back just the userid 
 You should store the userid locally
 
 If the user is a patient, you should display the userid

@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         let file = "setUpDone.txt"
+        let idfile = "PID.txt"
         
         if let dirs : [String] = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String] {
             let dir = dirs[0] //documents directory
@@ -34,6 +35,10 @@ class ViewController: UIViewController {
                 self.presentViewController(vc, animated: false, completion: nil)
             }else{
                 //Getting new UserID and does connection
+                let path2 = dir.stringByAppendingPathComponent(idfile);
+                let text2 = "3"
+                text2.writeToFile(path2, atomically: false, encoding: NSUTF8StringEncoding, error: nil);
+                
             }
             
             //writing

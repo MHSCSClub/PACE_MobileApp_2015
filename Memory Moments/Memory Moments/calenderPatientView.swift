@@ -214,9 +214,18 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func postRequest() {
+        var pid: String = "";
+        if let dirs : [String] = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String] {
+            let dir = dirs[0] //documents directory
+            let path = dir.stringByAppendingPathComponent("PID.txt");
+            
+            //reading
+            pid = String(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil)!
+            println(pid)
+        }
         var url: NSURL = NSURL(string: "http://aakatz3.asuscomm.com:8085/mobile/updateevents.php")!
         var request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
-        var bodyData = "pid=2"
+        var bodyData = "pid=\(pid)"
         request.HTTPMethod = "POST"
         request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding);
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue())

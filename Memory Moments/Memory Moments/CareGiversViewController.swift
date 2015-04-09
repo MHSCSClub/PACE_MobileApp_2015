@@ -44,8 +44,8 @@ class CareGiversViewController: UIViewController, UITableViewDataSource, UITable
             //Sets up the Table View
             viewFrame.origin.y += 20
             logTableView.frame = viewFrame
-            logTableView.scrollEnabled = false;
-            //logTableView.rowHeight = 103;
+            logTableView.scrollEnabled = true;
+            logTableView.rowHeight = 70;
             // Add the table view to this view controller's view
             self.view.addSubview(logTableView)
             // Here, we tell the table view that we intend to use a cell we're going to call "LogCell"
@@ -64,7 +64,7 @@ class CareGiversViewController: UIViewController, UITableViewDataSource, UITable
         calendar = NSCalendar.currentCalendar()
         components = calendar.components(.DayCalendarUnit | .MonthCalendarUnit | .YearCalendarUnit | .CalendarUnitWeekday,fromDate: date);
         //save()
-        
+        fetchLog()
         
         
         
@@ -157,8 +157,10 @@ class CareGiversViewController: UIViewController, UITableViewDataSource, UITable
         let envents = Events[indexPath.row]
         let timestamp = NSDateFormatter.localizedStringFromDate(envents.time, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
         // Set the title of the cell to be the title of the logItem
-        cell.textLabel?.text = "Title: \(envents.title)\nDate: \(timestamp)"
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        cell.textLabel?.text = "\(envents.title)\nDate: \(timestamp)"
         cell.textLabel?.numberOfLines = 2;
+        
         return cell
     }
     

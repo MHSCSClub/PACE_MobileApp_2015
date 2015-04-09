@@ -77,6 +77,7 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
         let dateText = "\(components.month)/\(components.day)/\(components.year)";
         currentDateText.text = dateText;
         makeCalendar()
+        fetchLog()
         //save()
         
 
@@ -173,6 +174,7 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
         
         // Set the title of the cell to be the title of the logItem
         cell.textLabel?.text = envents.title
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         return cell
     }
     

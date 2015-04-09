@@ -10,13 +10,16 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet var PatientButton: UIButton!
+    @IBOutlet var Question: UILabel!
     @IBOutlet var headForCode: UILabel!
     @IBOutlet var ActualCode: UILabel!
     @IBOutlet var Done: UIButton!
     
+    @IBOutlet var CareTakerButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
     }
     override func viewDidAppear(animated: Bool) {
@@ -41,10 +44,21 @@ class ViewController: UIViewController {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = storyboard.instantiateViewControllerWithIdentifier("CareGiversViewController") as UIViewController
                 self.presentViewController(vc, animated: false, completion: nil)
+            }else{
+                setUp()
             }
             
             // Do any additional setup after loading the view, typically from a nib.
+            
         }
+    }
+    func setUp() {
+        //put ellents on screen for set up
+        PatientButton.hidden = false;
+        Question.hidden = false;
+        CareTakerButton.hidden = false;
+        self.view.backgroundColor = UIColor.whiteColor()
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -71,6 +85,11 @@ class ViewController: UIViewController {
                     //makes sure that the data base actually sent something back
                     if(data == nil){
                         print("Server connection failed");
+                        let alertController = UIAlertController(title: "Problem", message:
+                            "Server Connection Problem\nPlease try again", preferredStyle: UIAlertControllerStyle.Alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
+                        
+                        self.presentViewController(alertController, animated: true, completion: nil)
                         return;
                     }
                     var jsonError: NSError?
@@ -92,14 +111,13 @@ class ViewController: UIViewController {
                     self.headForCode.hidden = false;
                     self.ActualCode.hidden = false;
                     self.Done.hidden = false;
+                    return;
             }
-
-            
-            
-            
             
         }
-        
+        let alertController = UIAlertController(title: "Problem", message:
+            "Server Connection Problem\nPlease try again", preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
     }
 
     @IBAction func careGiverSetUp(sender: AnyObject) {
@@ -123,6 +141,11 @@ class ViewController: UIViewController {
                     //makes sure that the data base actually sent something back
                     if(data == nil){
                         print("Server connection failed");
+                        let alertController = UIAlertController(title: "Problem", message:
+                            "Server Connection Problem\nPlease try again", preferredStyle: UIAlertControllerStyle.Alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
+                        
+                        self.presentViewController(alertController, animated: true, completion: nil)
                         return;
                     }
                     var jsonError: NSError?
@@ -139,14 +162,19 @@ class ViewController: UIViewController {
                     let vc = storyboard.instantiateViewControllerWithIdentifier("connect") as connect
                     vc.cid = id;
                     self.presentViewController(vc, animated: false, completion: nil)
-                
+             
+                    return;
             }
-            
+
             
             
             
             
         }
+        let alertController = UIAlertController(title: "Problem", message:
+            "Server Connection Problem\nPlease try again", preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
+        
 
     }
     @IBAction func Done(sender: AnyObject) {

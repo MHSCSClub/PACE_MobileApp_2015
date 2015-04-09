@@ -103,6 +103,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func careGiverSetUp(sender: AnyObject) {
+        println("Here");
         let idfile = "CID.txt"
         let fileC = "setUpDone.txt"
         if let dirs : [String] = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String] {

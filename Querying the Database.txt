@@ -36,6 +36,7 @@ The server will return, in the following format, all events in JSON format with 
 evtid = event id 
 time = date and time 
 type = type of event
+title = title of event
 descrition = description 
 
 Now you have all created events
@@ -80,6 +81,7 @@ To create new events, you must send the following in a POST request:
 	pid = patient id
 	time = date and time
 	type = type of event
+	title = title of the event
 	description = description of event
 Flashcards associated with the event will be passed like this:
 	fclen = # of flashcards

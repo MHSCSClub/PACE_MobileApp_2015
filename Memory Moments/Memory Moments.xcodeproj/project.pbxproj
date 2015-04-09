@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F42475D1AD5BF6800A0F6EA /* connect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F42475C1AD5BF6800A0F6EA /* connect.swift */; };
+		3F42475F1AD60C9200A0F6EA /* CareGiversViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F42475E1AD60C9200A0F6EA /* CareGiversViewController.swift */; };
 		3F9972251AC73F2D00EF05C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9972241AC73F2D00EF05C9 /* AppDelegate.swift */; };
 		3F9972281AC73F2D00EF05C9 /* Memory_Moments.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F9972261AC73F2D00EF05C9 /* Memory_Moments.xcdatamodeld */; };
 		3F99722A1AC73F2D00EF05C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9972291AC73F2D00EF05C9 /* ViewController.swift */; };
@@ -30,6 +32,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F42475C1AD5BF6800A0F6EA /* connect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = connect.swift; sourceTree = "<group>"; };
+		3F42475E1AD60C9200A0F6EA /* CareGiversViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareGiversViewController.swift; sourceTree = "<group>"; };
 		3F99721F1AC73F2D00EF05C9 /* Memory Moments.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Memory Moments.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F9972231AC73F2D00EF05C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F9972241AC73F2D00EF05C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +92,8 @@
 				3F9972241AC73F2D00EF05C9 /* AppDelegate.swift */,
 				3F9972291AC73F2D00EF05C9 /* ViewController.swift */,
 				3F99722B1AC73F2D00EF05C9 /* Main.storyboard */,
+				3F42475E1AD60C9200A0F6EA /* CareGiversViewController.swift */,
+				3F42475C1AD5BF6800A0F6EA /* connect.swift */,
 				3F9972471AC7404A00EF05C9 /* calenderPatientView.swift */,
 				3FC32CE91AD33AE100432124 /* EventViewController.swift */,
 				3F99722E1AC73F2E00EF05C9 /* Images.xcassets */,
@@ -227,8 +233,10 @@
 				3FBE1CE21AD328E2009030A0 /* MainData.swift in Sources */,
 				3F99722A1AC73F2D00EF05C9 /* ViewController.swift in Sources */,
 				3F9972281AC73F2D00EF05C9 /* Memory_Moments.xcdatamodeld in Sources */,
+				3F42475F1AD60C9200A0F6EA /* CareGiversViewController.swift in Sources */,
 				3F9972481AC7404A00EF05C9 /* calenderPatientView.swift in Sources */,
 				3F9972251AC73F2D00EF05C9 /* AppDelegate.swift in Sources */,
+				3F42475D1AD5BF6800A0F6EA /* connect.swift in Sources */,
 				3FC32CEA1AD33AE100432124 /* EventViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

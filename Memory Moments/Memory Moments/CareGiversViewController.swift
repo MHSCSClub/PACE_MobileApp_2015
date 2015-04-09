@@ -1,18 +1,8 @@
-//
-//  calenderPatientView.swift
-//  Memory Moments
-//
-//  Created by Jack Phillips on 3/28/15.
-//  Copyright (c) 2015 Jack Phillips. All rights reserved.
-//
-
-//This is the main page class for the patient calender
-
 import UIKit
 import CoreData
 import Foundation
 
-class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class CareGiversViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var firsttime: Bool = true;
     var NewEvents = [(Int(), NSDate(), String(), String(), String())];
     var Events = [MainData]()
@@ -26,7 +16,6 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
     var calendar: NSCalendar!
     var components: NSDateComponents!
     var daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
-    var dayString = ["Sun" , "Mon", "Tue", "Wed","Thu","Fri","Sat"];
     
     //screen demintions
     let screenSize: CGRect = UIScreen.mainScreen().bounds
@@ -48,15 +37,15 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
             println(date1!)
             
             
-          */
+            */
             println(NSDate())
-        
+            
             var viewFrame = self.view.frame
             //Sets up the Table View
-            viewFrame.origin.y += 260
+            viewFrame.origin.y += 20
             logTableView.frame = viewFrame
             logTableView.scrollEnabled = false;
-            logTableView.rowHeight = 103;
+            //logTableView.rowHeight = 103;
             // Add the table view to this view controller's view
             self.view.addSubview(logTableView)
             // Here, we tell the table view that we intend to use a cell we're going to call "LogCell"
@@ -74,14 +63,11 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
         date = NSDate()
         calendar = NSCalendar.currentCalendar()
         components = calendar.components(.DayCalendarUnit | .MonthCalendarUnit | .YearCalendarUnit | .CalendarUnitWeekday,fromDate: date);
-        let dateText = "\(components.month)/\(components.day)/\(components.year)";
-        currentDateText.text = dateText;
-        makeCalendar()
         //save()
         
-
         
-
+        
+        
         // Do any additional setup after loading the view.
         
         //timmer that refresh page after some time
@@ -121,9 +107,8 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
         // property of the Core Data object
         let sortDescriptor = NSSortDescriptor(key: "time", ascending: true)
         
-        //predicate 
+        //predicate
         let predicate1 = NSPredicate(format: "time > %@" , NSDate())
-        let predicate2 = NSPredicate(format: "time < %@", date1!)
         // Set the list of sort descriptors in the fetch request,
         // so it includes the sort descriptor
         
@@ -170,9 +155,10 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
         
         // Get the LogItem for this index
         let envents = Events[indexPath.row]
-        
+        let timestamp = NSDateFormatter.localizedStringFromDate(envents.time, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
         // Set the title of the cell to be the title of the logItem
-        cell.textLabel?.text = envents.title
+        cell.textLabel?.text = "Title: \(envents.title)\nDate: \(timestamp)"
+        cell.textLabel?.numberOfLines = 2;
         return cell
     }
     
@@ -188,66 +174,12 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
     
     
     
-    //Calendar
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func makeCalendar(){
-        let screenWidth = screenSize.width
-        
-        //displays the days of week
-        for i in 0...6 {
-            var days = UILabel(frame: CGRect(x: (CGFloat(i) * screenWidth * CGFloat(0.1428)), y: 90, width: (screenWidth * CGFloat(0.1428)), height: 30))
-            days.layer.borderWidth = 0.5;
-            days.textAlignment = NSTextAlignment.Center;
-            days.layer.borderColor = UIColor.blackColor().CGColor!;
-            days.text = dayString[i];
-            self.view.addSubview(days);
-        }
     
-        
-        //Displays Days around the current day
-        var day = components.day - (components.weekday-1);
-        if(day < 1) {
-            day = daysInMonth[components.month - 2] + day - 1;
-        }
-        for i in 0...13 {
-            if(day > daysInMonth[components.month - 1]){
-                day = 1;
-            }
-            if(components.day == day) {
-                //prints current day
-                var current = UILabel(frame: CGRect(x: (CGFloat(components.weekday-1) * screenWidth * CGFloat(0.1428)), y: 120, width: (screenWidth * CGFloat(0.1428)), height: 50))
-                current.backgroundColor = UIColor.redColor();
-                current.layer.borderWidth = 0.5;
-                current.textAlignment = NSTextAlignment.Center;
-                current.textColor = UIColor.whiteColor();
-                current.layer.borderColor = UIColor.blackColor().CGColor!;
-                current.text = "\(day)";
-                self.view.addSubview(current);
-            } else { //print every other day
-                //works to create the next line and to make sure that is starts from the begining
-                var a = 0;
-                var b = i;
-                if(i > 6) {
-                    a = 1;
-                    b -= 7;
-                }
-                var days = UILabel(frame: CGRect(x: (CGFloat(b) * screenWidth * CGFloat(0.1428)), y: (CGFloat(120) + (CGFloat(50) * CGFloat(a))), width: (CGFloat(screenWidth) * CGFloat(0.1428)), height: 50));
-                days.layer.borderWidth = 0.5;
-                days.textAlignment = NSTextAlignment.Center;
-                days.layer.borderColor = UIColor.blackColor().CGColor!;
-                days.text = "\(day)";
-                self.view.addSubview(days);
-                
-            }
-            day++;
-        }
-        
-
-    }
     func save() {
         var error : NSError?
         if(managedObjectContext!.save(&error) ) {
@@ -309,15 +241,3 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
         
     }
 }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-

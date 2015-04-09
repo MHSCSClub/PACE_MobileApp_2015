@@ -16,7 +16,12 @@ class EventViewController: UIViewController {
         var label = UILabel(frame: CGRect(x: 50, y: 50, width: 700, height: 700))
         label.textColor = UIColor.blackColor();
         label.numberOfLines = 4;
-        label.text = "\(passedData.title)\n \(passedData.time) \n \(passedData.descrition)\n \(passedData.type)"
+        let timestamp = NSDateFormatter.localizedStringFromDate(passedData.time, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
+        
+        var calendar = NSCalendar.currentCalendar()
+        var components = calendar.components(.DayCalendarUnit | .MonthCalendarUnit | .YearCalendarUnit | .CalendarUnitHour | .CalendarUnitMinute ,fromDate: passedData.time);
+        let dateText = "\(components.month)/\(components.day)/\(components.year) at \(components.hour):\(components.minute)";
+        label.text = "\(passedData.title)\n \(timestamp) \n \(passedData.descrition)\n \(passedData.type)"
         self.view.addSubview(label);
         // Do any additional setup after loading the view.
     }

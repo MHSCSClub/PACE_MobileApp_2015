@@ -7,7 +7,7 @@ class CareGiversViewController: UIViewController, UITableViewDataSource, UITable
     var NewEvents = [(Int(), NSDate(), String(), String(), String())];
     var Events = [MainData]()
     // Retreive the managedObjectContext from AppDelegate
-    let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     var logTableView = UITableView(frame: CGRectZero, style: .Plain)
     
     @IBOutlet var currentDateText: UILabel! //Var for current date box
@@ -62,7 +62,8 @@ class CareGiversViewController: UIViewController, UITableViewDataSource, UITable
         //gets current date
         date = NSDate()
         calendar = NSCalendar.currentCalendar()
-        components = calendar.components(.DayCalendarUnit | .MonthCalendarUnit | .YearCalendarUnit | .CalendarUnitWeekday,fromDate: date);
+        components = calendar.components(.CalendarUnitDay | .CalendarUnitMonth | .CalendarUnitYear | .CalendarUnitWeekday,fromDate: date);
+        
         //save()
         fetchLog()
         
@@ -84,10 +85,10 @@ class CareGiversViewController: UIViewController, UITableViewDataSource, UITable
         println(day)
         
         
-        if (month.utf16Count < 2) {
+        if (count(month) < 2) {
             month = "0\(components.month)"
         }
-        if (day.utf16Count < 2){
+        if (count(day) < 2){
             day = "0\(components.day+1)"
             if(components.day == daysInMonth[components.month-1]){
                 day = "01"
@@ -149,7 +150,7 @@ class CareGiversViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("LogCell") as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("LogCell") as! UITableViewCell
         
         // Get the LogItem for this index
         let envents = Events[indexPath.row]
@@ -166,7 +167,7 @@ class CareGiversViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("EventViewController") as EventViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("EventViewController") as! EventViewController
         vc.passedData = Events[indexPath.row];
         self.presentViewController(vc, animated: true, completion: nil)
         
@@ -224,15 +225,15 @@ class CareGiversViewController: UIViewController, UITableViewDataSource, UITable
                 }
                 //goes throught the events given from database
                 for event in arr {
-                    let evtid = event["evtid"] as Int;
-                    let dates = event["time"] as String;
+                    let evtid = event["evtid"] as! Int;
+                    let dates = event["time"] as! String;
                     let formatter = NSDateFormatter()
                     formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
                     formatter.timeZone = NSTimeZone.systemTimeZone()
                     let date1 = formatter.dateFromString(dates)
-                    let type = event["type"] as String;
-                    let title = event["title"] as String;
-                    let descrition = event["description"] as String;
+                    let type = event["type"] as! String;
+                    let title = event["title"] as! String;
+                    let descrition = event["description"] as! String;
                     self.NewEvents.append(evtid, date1!, type, descrition, title);
                 }
                 if (self.firsttime) {

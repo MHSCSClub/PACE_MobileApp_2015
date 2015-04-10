@@ -18,7 +18,7 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
     var Events = [MainData]()
     var EveryEvent = [MainData]()
     // Retreive the managedObjectContext from AppDelegate
-    let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     var logTableView = UITableView(frame: CGRectZero, style: .Plain)
     
     @IBOutlet var currentDateText: UILabel! //Var for current date box
@@ -74,7 +74,7 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
         //gets current date
         date = NSDate()
         calendar = NSCalendar.currentCalendar()
-        components = calendar.components(.DayCalendarUnit | .MonthCalendarUnit | .YearCalendarUnit | .CalendarUnitWeekday,fromDate: date);
+        components = calendar.components(.CalendarUnitDay | .CalendarUnitMonth | .CalendarUnitYear | .CalendarUnitWeekday,fromDate: date);
         let dateText = "\(components.month)/\(components.day)/\(components.year)";
         currentDateText.text = dateText;
         makeCalendar()
@@ -100,10 +100,10 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
         println(day)
         
         
-        if (month.utf16Count < 2) {
+        if (count(month) < 2) {
             month = "0\(components.month)"
         }
-        if (day.utf16Count < 2){
+        if (count(day) < 2){
             day = "0\(components.day+1)"
             if(components.day == daysInMonth[components.month-1]){
                 day = "01"
@@ -132,7 +132,7 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
             EveryEvent = fetchResults
             
         }
-        fetchRequest.predicate = NSCompoundPredicate.andPredicateWithSubpredicates([predicate1!, predicate2!])
+        fetchRequest.predicate = NSCompoundPredicate.andPredicateWithSubpredicates([predicate1, predicate2])
         if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [MainData] {
             Events = fetchResults
             
@@ -171,7 +171,7 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("LogCell") as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("LogCell") as! UITableViewCell
         
         // Get the LogItem for this index
         let envents = Events[indexPath.row]
@@ -186,7 +186,7 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("EventViewController") as EventViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("EventViewController") as! EventViewController
         vc.passedData = Events[indexPath.row];
         self.presentViewController(vc, animated: true, completion: nil)
         
@@ -294,15 +294,15 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
                 }
                 //goes throught the events given from database
                 for event in arr {
-                    let evtid = event["evtid"] as Int;
-                    let dates = event["time"] as String;
+                    let evtid = event["evtid"] as! Int;
+                    let dates = event["time"] as! String;
                     let formatter = NSDateFormatter()
                     formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
                     formatter.timeZone = NSTimeZone.systemTimeZone()
                     let date1 = formatter.dateFromString(dates)
-                    let type = event["type"] as String;
-                    let title = event["title"] as String;
-                    let descrition = event["description"] as String;
+                    let type = event["type"] as! String;
+                    let title = event["title"] as! String;
+                    let descrition = event["description"] as! String;
                     self.NewEvents.append(evtid, date1!, type, descrition, type);
                 }
                 print(self.NewEvents[0])

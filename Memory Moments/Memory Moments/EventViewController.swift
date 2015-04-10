@@ -19,7 +19,7 @@ class EventViewController: UIViewController {
         let timestamp = NSDateFormatter.localizedStringFromDate(passedData.time, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
         
         var calendar = NSCalendar.currentCalendar()
-        var components = calendar.components(.DayCalendarUnit | .MonthCalendarUnit | .YearCalendarUnit | .CalendarUnitHour | .CalendarUnitMinute ,fromDate: passedData.time);
+        let components = calendar.components(.CalendarUnitDay | .CalendarUnitMonth | .CalendarUnitYear | .CalendarUnitWeekday,fromDate: passedData.time);
         let dateText = "\(components.month)/\(components.day)/\(components.year) at \(components.hour):\(components.minute)";
         label.text = "\(passedData.title)\n \(timestamp) \n \(passedData.descrition)\n \(passedData.type)"
         self.view.addSubview(label);

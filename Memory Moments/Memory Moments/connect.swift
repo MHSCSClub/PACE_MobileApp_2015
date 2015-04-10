@@ -53,7 +53,7 @@ class connect: UIViewController {
                     text.writeToFile(pathDone, atomically: false, encoding: NSUTF8StringEncoding, error: nil);
                     print("Sucsess");
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let vc = storyboard.instantiateViewControllerWithIdentifier("CareGiversViewController") as UIViewController
+                    let vc = storyboard.instantiateViewControllerWithIdentifier("CareGiversViewController") as! UIViewController
                     self.presentViewController(vc, animated: false, completion: nil)
             }
         }

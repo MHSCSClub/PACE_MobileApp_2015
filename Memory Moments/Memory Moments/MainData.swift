@@ -18,7 +18,7 @@ class MainData: NSManagedObject {
     @NSManaged var descrition: String
     
     class func createInManagedObjectContext(moc: NSManagedObjectContext, evtid: NSNumber, time: NSDate, type: String, descrition: String, Title: String) -> MainData {
-        let newItem = NSEntityDescription.insertNewObjectForEntityForName("MainData", inManagedObjectContext: moc) as MainData
+        let newItem = NSEntityDescription.insertNewObjectForEntityForName("MainData", inManagedObjectContext: moc) as! MainData
         newItem.evtid = evtid
         newItem.time = time
         newItem.type = type

@@ -37,12 +37,12 @@ class ViewController: UIViewController {
             
             if(text2 == "YesPas"){
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewControllerWithIdentifier("calenderPatientView") as UIViewController
+                let vc = storyboard.instantiateViewControllerWithIdentifier("calenderPatientView") as! UIViewController
                 self.presentViewController(vc, animated: false, completion: nil)
             }
             else if(text2 == "YesCar"){
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewControllerWithIdentifier("CareGiversViewController") as UIViewController
+                let vc = storyboard.instantiateViewControllerWithIdentifier("CareGiversViewController") as! UIViewController
                 self.presentViewController(vc, animated: false, completion: nil)
             }else{
                 setUp()
@@ -94,7 +94,7 @@ class ViewController: UIViewController {
                     }
                     var jsonError: NSError?
                     if let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as? NSDictionary {
-                        id = json["userid"] as String;
+                        id = json["userid"] as! String;
                     }else{
                         print("Fail to pull data correctly")
                     }
@@ -150,7 +150,7 @@ class ViewController: UIViewController {
                     }
                     var jsonError: NSError?
                     if let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &jsonError) as? NSDictionary {
-                        id = json["userid"] as String;
+                        id = json["userid"] as! String;
                     }else{
                         print("Fail to pull data correctly")
                     }
@@ -159,7 +159,7 @@ class ViewController: UIViewController {
                     
                     id.writeToFile(pathID, atomically: false, encoding: NSUTF8StringEncoding, error: nil);
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let vc = storyboard.instantiateViewControllerWithIdentifier("connect") as connect
+                    let vc = storyboard.instantiateViewControllerWithIdentifier("connect") as! connect
                     vc.cid = id;
                     self.presentViewController(vc, animated: false, completion: nil)
              
@@ -179,7 +179,7 @@ class ViewController: UIViewController {
     }
     @IBAction func Done(sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("calenderPatientView") as UIViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("calenderPatientView") as! UIViewController
         self.presentViewController(vc, animated: false, completion: nil)
     }
 

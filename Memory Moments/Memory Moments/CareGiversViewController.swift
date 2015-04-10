@@ -57,7 +57,6 @@ class CareGiversViewController: UIViewController, UITableViewDataSource, UITable
             logTableView.dataSource = self
             logTableView.delegate = self
             
-            // Loop through, creating items
             
         }
         //gets current date
@@ -112,7 +111,7 @@ class CareGiversViewController: UIViewController, UITableViewDataSource, UITable
         // so it includes the sort descriptor
         
         fetchRequest.sortDescriptors = [sortDescriptor]
-        //fetchRequest.predicate = NSCompoundPredicate.andPredicateWithSubpredicates([predicate1!, predicate2!])
+        fetchRequest.predicate = predicate1
         if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [MainData] {
             Events = fetchResults
             

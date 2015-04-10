@@ -255,6 +255,25 @@
             </objects>
             <point key="canvasLocation" x="1136" y="914"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="cn2-X4-rWQ">
+            <objects>
+                <viewController id="XFp-SK-EPh" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="B0x-tJ-47T"/>
+                        <viewControllerLayoutGuide type="bottom" id="igc-io-qtf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gSU-fe-hu2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7xX-1t-4Jb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1594" y="914"/>
+        </scene>
         <!--Event View Controller-->
         <scene sceneID="iSg-QJ-buY">
             <objects>

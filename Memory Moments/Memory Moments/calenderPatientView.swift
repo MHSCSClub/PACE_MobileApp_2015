@@ -16,6 +16,7 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
     var firsttime: Bool = true;
     var NewEvents = [(Int(), NSDate(), String(), String(), String())];
     var Events = [MainData]()
+    var EveryEvent = [MainData]()
     // Retreive the managedObjectContext from AppDelegate
     let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
     var logTableView = UITableView(frame: CGRectZero, style: .Plain)
@@ -86,11 +87,10 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
         // Do any additional setup after loading the view.
         
         //timmer that refresh page after some time
-        //var timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+        var timer = NSTimer.scheduledTimerWithTimeInterval(300.0, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
     }
     //updates screen
     func update() {
-        print("Here")
         postRequest()
     }
     //Gets the data from Core Data
@@ -117,7 +117,6 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
         let date1 = formatter.dateFromString(dates)
         
         let fetchRequest = NSFetchRequest(entityName: "MainData")
-        let fetchRequest2 = NSFetchRequest(entityName: "MainData")
         // Create a sort descriptor object that sorts on the "title"
         // property of the Core Data object
         let sortDescriptor = NSSortDescriptor(key: "time", ascending: true)
@@ -129,11 +128,16 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
         // so it includes the sort descriptor
         
         fetchRequest.sortDescriptors = [sortDescriptor]
-        //fetchRequest.predicate = NSCompoundPredicate.andPredicateWithSubpredicates([predicate1!, predicate2!])
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [MainData] {
+            EveryEvent = fetchResults
+            
+        }
+        fetchRequest.predicate = NSCompoundPredicate.andPredicateWithSubpredicates([predicate1!, predicate2!])
         if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [MainData] {
             Events = fetchResults
             
         }
+        
         
     }
     //takes in the info from database and adds new idems to core data
@@ -142,8 +146,8 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
         for (ID, DATE, TYPE, Dis, Title) in NewEvents {
             // Create an individual item
             var used: Bool = false;
-            for event in Events {
-                if (event.evtid == ID){
+            for evt in EveryEvent {
+                if (evt.evtid == ID){
                     used = true;
                 }
             }
@@ -297,6 +301,7 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
                     formatter.timeZone = NSTimeZone.systemTimeZone()
                     let date1 = formatter.dateFromString(dates)
                     let type = event["type"] as String;
+                    let title = event["title"] as String;
                     let descrition = event["description"] as String;
                     self.NewEvents.append(evtid, date1!, type, descrition, type);
                 }

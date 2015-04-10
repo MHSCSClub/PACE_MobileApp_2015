@@ -192,8 +192,8 @@
                                     <action selector="Connect:" destination="wcq-9e-uuz" eventType="touchUpInside" id="9JN-Lq-909"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Write the number for the Pasient" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lV8-gN-rO7">
-                                <rect key="frame" x="63" y="90" width="249" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Write the number for the Patient" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lV8-gN-rO7">
+                                <rect key="frame" x="65" y="90" width="245" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -229,7 +229,25 @@
                     <view key="view" contentMode="scaleToFill" id="53W-pU-Cay">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1fH-Qk-GEX">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="1Qd-gz-Y4Y"/>
+                                    <barButtonItem style="plain" systemItem="add" id="s7s-fd-kxU">
+                                        <connections>
+                                            <action selector="AddEvent:" destination="lDS-fa-NvS" id="7bp-3w-oGz"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1fH-Qk-GEX" firstAttribute="bottom" secondItem="ItO-Yo-vK0" secondAttribute="top" id="1Jc-th-aeL"/>
+                            <constraint firstAttribute="trailing" secondItem="1fH-Qk-GEX" secondAttribute="trailing" id="QMh-7Z-3Xe"/>
+                            <constraint firstItem="1fH-Qk-GEX" firstAttribute="leading" secondItem="53W-pU-Cay" secondAttribute="leading" id="wUT-kx-qmS"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>

@@ -43,6 +43,7 @@ class CareGiversViewController: UIViewController, UITableViewDataSource, UITable
             var viewFrame = self.view.frame
             //Sets up the Table View
             viewFrame.origin.y += 20
+            viewFrame.size.height -= 65;
             logTableView.frame = viewFrame
             logTableView.scrollEnabled = true;
             logTableView.rowHeight = 70;
@@ -71,11 +72,10 @@ class CareGiversViewController: UIViewController, UITableViewDataSource, UITable
         // Do any additional setup after loading the view.
         
         //timmer that refresh page after some time
-        //var timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+        var timer = NSTimer.scheduledTimerWithTimeInterval(300.0, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
     }
     //updates screen
     func update() {
-        print("Here")
         postRequest()
     }
     //Gets the data from Core Data
@@ -102,7 +102,6 @@ class CareGiversViewController: UIViewController, UITableViewDataSource, UITable
         let date1 = formatter.dateFromString(dates)
         
         let fetchRequest = NSFetchRequest(entityName: "MainData")
-        let fetchRequest2 = NSFetchRequest(entityName: "MainData")
         // Create a sort descriptor object that sorts on the "title"
         // property of the Core Data object
         let sortDescriptor = NSSortDescriptor(key: "time", ascending: true)
@@ -189,6 +188,10 @@ class CareGiversViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
+    
+    @IBAction func AddEvent(sender: AnyObject) {
+        print("AddEvent")
+    }
     func postRequest() {
         var pid: String = "";
         if let dirs : [String] = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String] {
@@ -229,10 +232,10 @@ class CareGiversViewController: UIViewController, UITableViewDataSource, UITable
                     formatter.timeZone = NSTimeZone.systemTimeZone()
                     let date1 = formatter.dateFromString(dates)
                     let type = event["type"] as String;
+                    let title = event["title"] as String;
                     let descrition = event["description"] as String;
-                    self.NewEvents.append(evtid, date1!, type, descrition, type);
+                    self.NewEvents.append(evtid, date1!, type, descrition, title);
                 }
-                print(self.NewEvents[0])
                 if (self.firsttime) {
                     self.NewEvents.removeAtIndex(0);
                     self.firsttime = false;

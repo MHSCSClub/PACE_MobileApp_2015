@@ -68,11 +68,31 @@ class addEventViewController: UIViewController, UIPickerViewDataSource, UITextVi
         }
         datePicker.timeZone = NSTimeZone(name: "Etc/UTC")
         let time = datePicker.date
-        print("Date \(time)")
+        var calendar = NSCalendar.currentCalendar()
+        var components = calendar.components(.CalendarUnitDay | .CalendarUnitMonth | .CalendarUnitYear | .CalendarUnitMinute | .CalendarUnitHour ,fromDate: time);
+        var month:String = "\(components.month)"
+        var day:String = "\(components.day)"
+        var min:String = "\(components.minute)"
+        var hour:String = "\(components.hour)"
+        if (count(month) < 2) {
+            month = "0\(components.month)"
+        }
+        if (count(day) < 2){
+            day = "0\(components.day)"
+            
+        }
+        if (count(min) < 2){
+            min = "0\(components.minute)"
+        }
+        if (count(hour) < 2){
+            min = "0\(components.hour)"
+        }
+        let date: String = "\(components.year)-\(month)-\(day) \(hour):\(min):00"
+        print("Date \(date)")
         //sets up and makes conection to the database
         var url: NSURL = NSURL(string: "http://aakatz3.asuscomm.com:8085/mobile/createevent.php")!
         var request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
-        var bodyData = "pid=\(pid)&time=\(time)&type=\(typeOptions[Type.selectedRowInComponent(0)])&title=\(eventTitle.text)&description=\(textField.text)"
+        var bodyData = "pid=\(pid)&time=\(date)&type=\(typeOptions[Type.selectedRowInComponent(0)])&title=\(eventTitle.text)&description=\(textField.text)"
         request.HTTPMethod = "POST"
         request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding);
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue())

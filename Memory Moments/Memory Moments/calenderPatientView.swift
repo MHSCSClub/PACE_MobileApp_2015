@@ -105,9 +105,10 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
         }
         if (count(day) < 2){
             day = "0\(components.day+1)"
-            if(components.day == daysInMonth[components.month-1]){
-                day = "01"
-            }
+            
+        }
+        if(components.day == daysInMonth[components.month-1]){
+            day = "01"
         }
         let dates = "\(components.year)-\(month)-\(day) 00:00:00"
         println(dates)

@@ -18,9 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         //Allow for notifications
-        /*if(UIApplication.instancesRespondToSelector(Selector("registerUserNotificationSettings:"))) {
+        if(UIApplication.instancesRespondToSelector(Selector("registerUserNotificationSettings:"))) {
             UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Alert | .Badge, categories: nil))
-        }*/
+        }
         return true
     }
 
@@ -96,7 +96,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
     }()
-
+    //works when aplication clicked reminder
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        application.applicationIconBadgeNumber = 0
+        print("Here is where you go to other screen")
+    }
     // MARK: - Core Data Saving support
 
     func saveContext () {

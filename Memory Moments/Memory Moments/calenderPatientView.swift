@@ -125,6 +125,7 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
         //predicate 
         let predicate1 = NSPredicate(format: "time > %@" , NSDate())
         let predicate2 = NSPredicate(format: "time < %@", date1!)
+        let predicate3 = NSPredicate(format: "type != %@", "Reminder")
         // Set the list of sort descriptors in the fetch request,
         // so it includes the sort descriptor
         
@@ -133,7 +134,7 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
             EveryEvent = fetchResults
             
         }
-        fetchRequest.predicate = NSCompoundPredicate.andPredicateWithSubpredicates([predicate1, predicate2])
+        fetchRequest.predicate = NSCompoundPredicate.andPredicateWithSubpredicates([predicate1, predicate2, predicate3])
         if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [MainData] {
             Events = fetchResults
             
@@ -154,6 +155,16 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
             }
             //makes sure that the element has not been brought in already
             if(!used){
+                //prosses reminders and sets it to pop up at that time
+                if(TYPE == "Reminder"){
+                    var localNotification = UILocalNotification()
+                    localNotification.fireDate = DATE
+                    localNotification.alertBody = "\(Title)\n\(Dis)"
+                    localNotification.timeZone = NSTimeZone.defaultTimeZone()
+                    localNotification.applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
+                    
+                    UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+                }
                 MainData.createInManagedObjectContext(self.managedObjectContext!, evtid: ID, time: DATE, type: TYPE, descrition: Dis, Title: Title)
             }
         }
@@ -304,7 +315,7 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
                     let type = event["type"] as! String;
                     let title = event["title"] as! String;
                     let descrition = event["description"] as! String;
-                    self.NewEvents.append(evtid, date1!, type, descrition, type);
+                    self.NewEvents.append(evtid, date1!, type, descrition, title);
                 }
                 print(self.NewEvents[0])
                 if (self.firsttime) {

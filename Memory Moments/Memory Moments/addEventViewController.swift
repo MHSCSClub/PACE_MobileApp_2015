@@ -66,6 +66,7 @@ class addEventViewController: UIViewController, UIPickerViewDataSource, UITextVi
             pid = String(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil)!
             println(pid)
         }
+        //fixes the date from the date picker so it's right for the server
         datePicker.timeZone = NSTimeZone.systemTimeZone()
         let time = datePicker.date
         var calendar = NSCalendar.currentCalendar()

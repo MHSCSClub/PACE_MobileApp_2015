@@ -66,7 +66,7 @@ class addEventViewController: UIViewController, UIPickerViewDataSource, UITextVi
             pid = String(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil)!
             println(pid)
         }
-        datePicker.timeZone = NSTimeZone(name: "Etc/UTC")
+        datePicker.timeZone = NSTimeZone.systemTimeZone()
         let time = datePicker.date
         var calendar = NSCalendar.currentCalendar()
         var components = calendar.components(.CalendarUnitDay | .CalendarUnitMonth | .CalendarUnitYear | .CalendarUnitMinute | .CalendarUnitHour ,fromDate: time);

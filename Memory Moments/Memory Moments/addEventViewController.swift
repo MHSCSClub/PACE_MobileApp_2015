@@ -108,6 +108,9 @@ class addEventViewController: UIViewController, UIPickerViewDataSource, UITextVi
                 //makes sure that the data base actually sent something back
                 if(data == nil){
                     print("Server connection failed");
+                    let alertController = UIAlertController(title: "Problem", message:
+                        "Server Connection Problem\nPlease try again", preferredStyle: UIAlertControllerStyle.Alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
                     return;
                 }
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -119,6 +122,7 @@ class addEventViewController: UIViewController, UIPickerViewDataSource, UITextVi
             "Server Connection Problem\nPlease try again", preferredStyle: UIAlertControllerStyle.Alert)
         alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
     }
+    
 
     /*
     // MARK: - Navigation

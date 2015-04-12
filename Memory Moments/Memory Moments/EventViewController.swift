@@ -10,6 +10,7 @@ import UIKit
 
 class EventViewController: UIViewController {
 
+    @IBOutlet var test: UILabel!
     var passedData: MainData!;
     override func viewDidLoad() {
         super.viewDidLoad()

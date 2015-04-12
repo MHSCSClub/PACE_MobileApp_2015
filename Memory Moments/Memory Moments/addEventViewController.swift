@@ -26,6 +26,11 @@ class addEventViewController: UIViewController, UIPickerViewDataSource, UITextVi
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func addFlash(sender: AnyObject) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("FlashCardViewController") as! UIViewController
+        self.presentViewController(vc, animated: false, completion: nil)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -93,7 +98,7 @@ class addEventViewController: UIViewController, UIPickerViewDataSource, UITextVi
         //sets up and makes conection to the database
         var url: NSURL = NSURL(string: "http://aakatz3.asuscomm.com:8085/mobile/createevent.php")!
         var request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
-        var bodyData = "pid=\(pid)&time=\(date)&type=\(typeOptions[Type.selectedRowInComponent(0)])&title=\(eventTitle.text)&description=\(textField.text)"
+        var bodyData = "pid=\(pid)&time=\(date)&type=\(typeOptions[Type.selectedRowInComponent(0)])&title=\(eventTitle.text)&description=\(textField.text)&fclen=0"
         request.HTTPMethod = "POST"
         request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding);
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue())

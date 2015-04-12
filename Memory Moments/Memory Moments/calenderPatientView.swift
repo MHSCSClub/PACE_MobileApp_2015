@@ -13,7 +13,6 @@ import CoreData
 import Foundation
 
 class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    var firsttime: Bool = true;
     var NewEvents = [(Int(), NSDate(), String(), String(), String())];
     var Events = [MainData]()
     var EveryEvent = [MainData]()
@@ -317,11 +316,12 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
                     let descrition = event["description"] as! String;
                     self.NewEvents.append(evtid, date1!, type, descrition, title);
                 }
-                print(self.NewEvents[0])
-                if (self.firsttime) {
+                
+                print(self.NewEvents[0])/*
+                if ("\(self.NewEvents[0]))" == "") {
                     self.NewEvents.removeAtIndex(0);
-                    self.firsttime = false;
-                }
+                    print(self.NewEvents[0])
+                }*/
                 self.pullInNewData()
                 
         }

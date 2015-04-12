@@ -31,6 +31,7 @@ class connect: UIViewController {
             let dir = dirs[0] //documents directory
             let pathID = dir.stringByAppendingPathComponent(idfile);
             let pathDone = dir.stringByAppendingPathComponent(fileC);
+            let pathFlash = dir.stringByAppendingPathComponent("fcid.txt");
             var id: String = "";
             var url: NSURL = NSURL(string: "http://aakatz3.asuscomm.com:8085/mobile/linkpatient.php")!
             var request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
@@ -48,6 +49,7 @@ class connect: UIViewController {
                     }
                     id = self.TextInput.text;
                     id.writeToFile(pathID, atomically: false, encoding: NSUTF8StringEncoding, error: nil);
+                    "0".writeToFile(pathFlash, atomically: false, encoding: NSUTF8StringEncoding, error: nil)
                     //writing that it's complete
                     let text = "YesCar"
                     text.writeToFile(pathDone, atomically: false, encoding: NSUTF8StringEncoding, error: nil);

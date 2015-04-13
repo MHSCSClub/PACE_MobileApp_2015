@@ -22,6 +22,7 @@
 		3FBE1CE21AD328E2009030A0 /* MainData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBE1CE11AD328E2009030A0 /* MainData.swift */; };
 		3FC32CEA1AD33AE100432124 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC32CE91AD33AE100432124 /* EventViewController.swift */; };
 		3FEECF6E1AD83E4B00A73F55 /* addEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEECF6D1AD83E4B00A73F55 /* addEventViewController.swift */; };
+		83F006BD1ADC52B90062D586 /* AddFlashCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F006BC1ADC52B90062D586 /* AddFlashCardsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		3FBE1CE11AD328E2009030A0 /* MainData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainData.swift; sourceTree = "<group>"; };
 		3FC32CE91AD33AE100432124 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		3FEECF6D1AD83E4B00A73F55 /* addEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addEventViewController.swift; sourceTree = "<group>"; };
+		83F006BC1ADC52B90062D586 /* AddFlashCardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFlashCardsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 		3F9972211AC73F2D00EF05C9 /* Memory Moments */ = {
 			isa = PBXGroup;
 			children = (
+				83F006BC1ADC52B90062D586 /* AddFlashCardsViewController.swift */,
 				3F9972241AC73F2D00EF05C9 /* AppDelegate.swift */,
 				3F9972291AC73F2D00EF05C9 /* ViewController.swift */,
 				3F99722B1AC73F2D00EF05C9 /* Main.storyboard */,
@@ -249,6 +252,7 @@
 				3F42475D1AD5BF6800A0F6EA /* connect.swift in Sources */,
 				3F150A501ADA18570004BE83 /* Flashcards.swift in Sources */,
 				3FC32CEA1AD33AE100432124 /* EventViewController.swift in Sources */,
+				83F006BD1ADC52B90062D586 /* AddFlashCardsViewController.swift in Sources */,
 				3FEECF6E1AD83E4B00A73F55 /* addEventViewController.swift in Sources */,
 				3F150A4E1AD9FE100004BE83 /* FlashCardViewController.swift in Sources */,
 			);

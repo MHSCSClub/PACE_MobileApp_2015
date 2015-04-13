@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet var headForCode: UILabel!
     @IBOutlet var ActualCode: UILabel!
     @IBOutlet var Done: UIButton!
+    @IBOutlet var loading: UIActivityIndicatorView!
     
     @IBOutlet var CareTakerButton: UIButton!
     
@@ -57,6 +58,7 @@ class ViewController: UIViewController {
         PatientButton.hidden = false;
         Question.hidden = false;
         CareTakerButton.hidden = false;
+        loading.hidden = true;
         self.view.backgroundColor = UIColor.whiteColor()
 
     }
@@ -65,7 +67,8 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func patientSetUp(sender: AnyObject) {
-        
+        loading.startAnimating()
+        loading.hidden = false;
         let idfile = "PID.txt"
         let fileC = "setUpDone.txt"
         if let dirs : [String] = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String] {
@@ -111,6 +114,8 @@ class ViewController: UIViewController {
                     self.headForCode.hidden = false;
                     self.ActualCode.hidden = false;
                     self.Done.hidden = false;
+                    self.loading.stopAnimating()
+                    self.loading.hidden = true;
                     return;
             }
             
@@ -121,6 +126,8 @@ class ViewController: UIViewController {
     }
 
     @IBAction func careGiverSetUp(sender: AnyObject) {
+        loading.startAnimating()
+        loading.hidden = false;
         println("Here");
         let idfile = "CID.txt"
         let fileC = "setUpDone.txt"
@@ -162,7 +169,8 @@ class ViewController: UIViewController {
                     let vc = storyboard.instantiateViewControllerWithIdentifier("connect") as! connect
                     vc.cid = id;
                     self.presentViewController(vc, animated: false, completion: nil)
-             
+                    self.loading.stopAnimating()
+                    self.loading.hidden = true;
                     return;
             }
 

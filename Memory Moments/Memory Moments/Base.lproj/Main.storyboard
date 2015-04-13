@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -80,6 +80,9 @@
                                     <action selector="Done:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LXL-0a-zBU"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="g2k-J6-M02">
+                                <rect key="frame" x="150" y="359" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -90,11 +93,13 @@
                             <constraint firstItem="OgY-4o-vI2" firstAttribute="trailing" secondItem="du6-iq-Qzp" secondAttribute="trailing" id="H7L-GB-X56"/>
                             <constraint firstItem="OgY-4o-vI2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="66" id="HgG-Bd-9lq"/>
                             <constraint firstItem="v1G-DN-avH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="91" id="ILd-hO-G3C"/>
+                            <constraint firstItem="g2k-J6-M02" firstAttribute="top" secondItem="du6-iq-Qzp" secondAttribute="bottom" constant="38" id="JOP-Jh-meT"/>
                             <constraint firstItem="3OP-Rf-TJP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="3" id="Tnd-gL-hRx"/>
                             <constraint firstItem="3OP-Rf-TJP" firstAttribute="top" secondItem="8XQ-5U-UJh" secondAttribute="bottom" constant="8" symbolic="YES" id="XSX-S1-Pe2"/>
                             <constraint firstItem="8XQ-5U-UJh" firstAttribute="centerX" secondItem="TWS-JG-Yv0" secondAttribute="centerX" id="dsj-Vj-Xe3"/>
                             <constraint firstItem="du6-iq-Qzp" firstAttribute="top" secondItem="OgY-4o-vI2" secondAttribute="bottom" constant="13" id="iRs-DE-2dh"/>
                             <constraint firstItem="TWS-JG-Yv0" firstAttribute="top" secondItem="8XQ-5U-UJh" secondAttribute="bottom" constant="40" id="kTF-VU-Xwg"/>
+                            <constraint firstAttribute="centerX" secondItem="g2k-J6-M02" secondAttribute="centerX" id="mTb-Il-tBS"/>
                             <constraint firstItem="OgY-4o-vI2" firstAttribute="centerX" secondItem="TWS-JG-Yv0" secondAttribute="centerX" id="pJV-sP-2Ae"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3OP-Rf-TJP" secondAttribute="trailing" constant="-3" id="qpt-U5-SZ1"/>
                             <constraint firstItem="OgY-4o-vI2" firstAttribute="leading" secondItem="du6-iq-Qzp" secondAttribute="leading" id="s5q-jl-hXY"/>
@@ -110,6 +115,7 @@
                         <outlet property="PatientButton" destination="OgY-4o-vI2" id="Ngd-bZ-1p3"/>
                         <outlet property="Question" destination="TWS-JG-Yv0" id="YQ5-hQ-RoD"/>
                         <outlet property="headForCode" destination="8XQ-5U-UJh" id="LIw-zu-tYE"/>
+                        <outlet property="loading" destination="g2k-J6-M02" id="iAK-ij-jvz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -325,7 +331,7 @@
                                 </date>
                             </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tGw-49-AYw">
-                                <rect key="frame" x="155" y="519" width="165" height="49"/>
+                                <rect key="frame" x="164" y="518" width="156" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="UKy-Uv-BGq"/>
@@ -434,7 +440,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MI9-3h-ZVd">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MI9-3h-ZVd">
                                 <rect key="frame" x="16" y="20" width="44" height="30"/>
                                 <state key="normal" title="&lt;Back">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -446,10 +452,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="tot-QQ-CYq" firstAttribute="top" secondItem="uNK-z7-nkD" secondAttribute="bottom" constant="20" id="EdZ-2c-Iqv"/>
                             <constraint firstItem="O9P-53-cUl" firstAttribute="leading" secondItem="ViZ-IM-mvx" secondAttribute="leadingMargin" id="MPJ-6d-Br0"/>
                             <constraint firstItem="tot-QQ-CYq" firstAttribute="leading" secondItem="ViZ-IM-mvx" secondAttribute="leadingMargin" id="cQH-8R-Grx"/>
-                            <constraint firstItem="tot-QQ-CYq" firstAttribute="top" secondItem="uNK-z7-nkD" secondAttribute="bottom" id="rdZ-Fi-QI7"/>
-                            <constraint firstItem="O9P-53-cUl" firstAttribute="top" secondItem="tot-QQ-CYq" secondAttribute="bottom" constant="128" id="zfu-SG-row"/>
+                            <constraint firstItem="O9P-53-cUl" firstAttribute="top" secondItem="tot-QQ-CYq" secondAttribute="bottom" constant="108" id="vzI-Qy-kAC"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -479,9 +485,18 @@
                                     <segue destination="div-dW-qcs" kind="show" id="VDr-ha-QY0"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4NA-Ih-vSL">
+                                <rect key="frame" x="300" y="221" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="test" destination="4NA-Ih-vSL" id="Kgp-A8-AA2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="43y-QI-8WV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

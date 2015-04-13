@@ -72,7 +72,7 @@ class CareGiversViewController: UIViewController, UITableViewDataSource, UITable
         // Do any additional setup after loading the view.
         
         //timmer that refresh page after some time
-        var timer = NSTimer.scheduledTimerWithTimeInterval(300.0, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+        var timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
     }
     //updates screen
     func update() {

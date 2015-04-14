@@ -13,11 +13,13 @@ class Flashcards: NSManagedObject {
 
     @NSManaged var name: String
     @NSManaged var fcid: NSNumber
+    @NSManaged var info: String
     
-    class func createInManagedObjectContext(moc: NSManagedObjectContext, name: String, fcid: Int) -> Flashcards {
+    class func createInManagedObjectContext(moc: NSManagedObjectContext, name: String, fcid: Int, info: String) -> Flashcards {
         let newItem = NSEntityDescription.insertNewObjectForEntityForName("Flashcards", inManagedObjectContext: moc) as! Flashcards
         newItem.name = name
         newItem.fcid = fcid
+        newItem.info = info
         return newItem
     }
 

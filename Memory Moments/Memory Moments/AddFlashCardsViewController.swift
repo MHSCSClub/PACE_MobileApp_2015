@@ -8,15 +8,24 @@
 
 import UIKit
 
-class AddFlashCardsViewController: UIViewController , UITextViewDelegate {
+class AddFlashCardsViewController: UIViewController , UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    //ID, time, Type, Discribtion, title
+    var event = [(Int(), NSDate(), String(), String(), String())];
+    var currentCards = [Flashcards]()
+    
     @IBOutlet weak var InformationBox: UITextView!
-
+    var picker = UIImagePickerController()
+    @IBOutlet var imagePerson: UIImageView!
+    @IBOutlet var button: UIButton!
+    @IBOutlet var Info: UITextView!
+    @IBOutlet var loading: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        picker.delegate = self
         InformationBox.layer.borderWidth = 1;
         InformationBox.layer.borderColor = UIColor.grayColor().CGColor
         InformationBox.delegate = self;
-        
+        loading.hidden = true;
         // Do any additional setup after loading the view.
     }
 
@@ -29,6 +38,26 @@ class AddFlashCardsViewController: UIViewController , UITextViewDelegate {
         InformationBox.resignFirstResponder()
     }
 
+    @IBAction func photoFromLibrary(sender: AnyObject) {
+        picker.allowsEditing = false
+        picker.sourceType = .PhotoLibrary
+        presentViewController(picker, animated: true, completion: nil)
+    }
+    //delagates
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        var chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        imagePerson.contentMode = .ScaleAspectFit
+        imagePerson.image = chosenImage
+        button.titleLabel?.text = ""
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    @IBAction func addFlash(sender: AnyObject) {
+        loading.hidden = false;
+        loading.startAnimating()
+    }
     /*
     // MARK: - Navigation
 

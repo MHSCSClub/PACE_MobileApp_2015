@@ -14,7 +14,7 @@ class FlashCardViewController: UIViewController, UITableViewDataSource, UITableV
     var event = [(Int(), NSDate(), String(), String(), String())];
     var Flash = [Flashcards]()
     var currentCards = [Flashcards]()
-    var NewEvents = [(Int(), String())];
+    var NewEvents = [(Int(), String(), String())];
     // Retreive the managedObjectContext from AppDelegate
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     var logTableView = UITableView(frame: CGRectZero, style: .Plain)
@@ -73,7 +73,7 @@ class FlashCardViewController: UIViewController, UITableViewDataSource, UITableV
     }
     func pullInNewData() {
         fetchLog()
-        for (fcid, name) in NewEvents {
+        for (fcid, name, info) in NewEvents {
             // Create an individual item
             var used: Bool = false;
             for evt in Flash {
@@ -83,7 +83,7 @@ class FlashCardViewController: UIViewController, UITableViewDataSource, UITableV
             }
             //makes sure that the element has not been brought in already
             if(!used && count(name) > 0){
-                Flashcards.createInManagedObjectContext(self.managedObjectContext!, name: name, fcid: fcid)
+                Flashcards.createInManagedObjectContext(self.managedObjectContext!, name: name, fcid: fcid, info: info)
             }
         }
         self.fetchLog()
@@ -149,6 +149,13 @@ class FlashCardViewController: UIViewController, UITableViewDataSource, UITableV
             println(error?.localizedDescription)
         }
     }
+    @IBAction func add(sender: AnyObject) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("AddFlashCardsViewController") as! AddFlashCardsViewController
+        vc.currentCards = currentCards;
+        vc.event = event;
+        self.presentViewController(vc, animated: false, completion: nil)
+    }
     func postRequest() {
         var pid: String = "";
         var fcidM: String = "";
@@ -191,7 +198,8 @@ class FlashCardViewController: UIViewController, UITableViewDataSource, UITableV
                 for event in arr {
                     let fcid = event["fcid"] as! Int;
                     let name = event["name"] as! String;
-                    self.NewEvents.append(fcid, name);
+                    let info = event["info"] as! String
+                    self.NewEvents.append(fcid, name, info);
                 }
                 if(self.NewEvents.count != 0){
                     "\(self.NewEvents[self.NewEvents.count - 1].0)".writeToFile(path2, atomically: false, encoding: NSUTF8StringEncoding, error: nil)

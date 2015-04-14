@@ -20,13 +20,20 @@ class FlashcardviewingViewController: UIViewController {
         info.layer.borderWidth = 1;
         info.layer.borderColor = UIColor.grayColor().CGColor
         name.text = card.name;
-        info.text = card.description
+        info.text = card.info
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    @IBAction func back(sender: AnyObject) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("FlashCardViewController") as! FlashCardViewController
+        vc.currentCards = currentCards;
+        vc.event = event;
+        self.presentViewController(vc, animated: false, completion: nil)
     }
     @IBAction func Add(sender: AnyObject) {
         currentCards.append(card);

@@ -677,6 +677,7 @@
                         <outlet property="button" destination="TLp-oO-lvq" id="IY0-54-SiD"/>
                         <outlet property="imagePerson" destination="b4z-eM-kJG" id="o1q-Il-sWD"/>
                         <outlet property="loading" destination="OKZ-bo-ccb" id="1Wn-d0-Ps6"/>
+                        <outlet property="name" destination="AG6-CZ-TfY" id="URY-gg-puF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lcx-Z4-3S1" userLabel="First Responder" sceneMemberID="firstResponder"/>

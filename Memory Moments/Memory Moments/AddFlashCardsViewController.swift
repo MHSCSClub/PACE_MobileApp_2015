@@ -13,6 +13,7 @@ class AddFlashCardsViewController: UIViewController , UITextViewDelegate, UIImag
     var event = [(Int(), NSDate(), String(), String(), String())];
     var currentCards = [Flashcards]()
     
+    @IBOutlet var name: UITextField!
     @IBOutlet weak var InformationBox: UITextView!
     var picker = UIImagePickerController()
     @IBOutlet var imagePerson: UIImageView!
@@ -58,11 +59,16 @@ class AddFlashCardsViewController: UIViewController , UITextViewDelegate, UIImag
         loading.hidden = false;
         loading.startAnimating()
         let filenames = "picture.jpeg"
+        var pid: String = "";
         if let dirs : [String] = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String] {
             let dir = dirs[0] //documents directory
             let path = dir.stringByAppendingPathComponent(filenames);
             let content: NSData = UIImageJPEGRepresentation(imagePerson.image, 1.0)
             content.writeToFile(path, atomically: true)
+            let path2 = dir.stringByAppendingPathComponent("PID.txt");
+            
+            //reading to get the PID of person
+            pid = String(contentsOfFile: path2, encoding: NSUTF8StringEncoding, error: nil)!
         }
 
         var url: NSURL = NSURL(string: "http://aakatz3.asuscomm.com:8085/mobile/createflashcard.php")!
@@ -99,12 +105,12 @@ class AddFlashCardsViewController: UIViewController , UITextViewDelegate, UIImag
         tempData.appendData(imageData)
         tempData.appendData("\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
         
-        body.appendData(tempData)
-        
         body.appendData("\r\n--\(boundary)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        var bodyData = "pid=\(pid)&time=\(date)&type=\(typeOptions[Type.selectedRowInComponent(0)])&title=\(eventTitle.text)&description=\(textField.text)&fclen=\(currentCards.count)"
+        var bodyData = "pid=\(pid)&name=\(name.text)&info=\(Info.text)&picture="
+        body.appendData(tempData)
+        var bodyy = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
         request!.setValue("\(body.length)", forHTTPHeaderField: "Content-Length")
-        request!.HTTPBody = body
+        request!.HTTPBody =  bodyy + body;
         
         
         

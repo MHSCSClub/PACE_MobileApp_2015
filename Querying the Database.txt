@@ -91,7 +91,10 @@ To /createevent.php
 New flashcards:
 To create new flashcards, send the following in a POST request:
 	pid = patient id
-	data
+	name = name of person
+	info = info
+	picture = picture of person (THIS IS A FILE)
+Note that picture must be uploaded through a FILE POST request, you can test FILE POST requests to /filetest.php
 To /createflashcard.php
 Server will return the highest indexed flashcard:
 	fcid: highest flashcard id

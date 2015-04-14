@@ -13,11 +13,20 @@ import Foundation
 class FlashCardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var event = [(Int(), NSDate(), String(), String(), String())];
     var Flash = [Flashcards]()
+    var currentCards = [Flashcards]()
     var NewEvents = [(Int(), String())];
     // Retreive the managedObjectContext from AppDelegate
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     var logTableView = UITableView(frame: CGRectZero, style: .Plain)
+    var currentFlash = UITableView(frame: CGRectZero, style: .Plain)
 
+    @IBAction func Back(sender: AnyObject) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("addEventViewController") as! addEventViewController
+        vc.currentCards = currentCards;
+        vc.event = event;
+        self.presentViewController(vc, animated: false, completion: nil)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         postRequest()
@@ -36,6 +45,15 @@ class FlashCardViewController: UIViewController, UITableViewDataSource, UITableV
         logTableView.dataSource = self
         logTableView.dataSource = self
         logTableView.delegate = self
+        var viewFrame2 = self.view.frame
+        viewFrame2.origin.y += 60;
+        viewFrame2.size.height = 100;
+        currentFlash.frame = viewFrame2
+        currentFlash.delegate = self
+        currentFlash.dataSource = self
+        currentFlash.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "Log")
+        self.view.addSubview(currentFlash)
+        
     }
     func fetchLog() {
         let fetchRequest = NSFetchRequest(entityName: "Flashcards")
@@ -78,25 +96,48 @@ class FlashCardViewController: UIViewController, UITableViewDataSource, UITableV
         // How many rows are there in this section?
         // There's only 1 section, and it has a number of rows
         // equal to the number of logItems, so return the count
-        return Flash.count
+        if(tableView == logTableView){
+            return Flash.count
+        }else{
+            return currentCards.count
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("LogCell") as! UITableViewCell
         
-        // Get the LogItem for this index
-        let envents = Flash[indexPath.row]
+        if(tableView == logTableView){
+            let cell = tableView.dequeueReusableCellWithIdentifier("LogCell") as! UITableViewCell
         
-        // Set the title of the cell to be the title of the logItem
-        cell.textLabel?.text = envents.name
-        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-        return cell
+            // Get the LogItem for this index
+            let envents = Flash[indexPath.row]
+        
+            // Set the title of the cell to be the title of the logItem
+            cell.textLabel?.text = envents.name
+            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+            return cell
+        }
+        else{
+            let cell = tableView.dequeueReusableCellWithIdentifier("Log") as! UITableViewCell
+            // Get the LogItem for this index
+            let envents = currentCards[indexPath.row]
+            
+            // Set the title of the cell to be the title of the logItem
+            cell.textLabel?.text = envents.name
+            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+            return cell
+        }
     }
     
     //Clicked Event going to next Page
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("FlashCard Page")
-        
+        if(tableView == logTableView){
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewControllerWithIdentifier("FlashcardviewingViewController") as! FlashcardviewingViewController
+            vc.currentCards = currentCards;
+            vc.card = Flash[indexPath.row]
+                vc.event = event;
+            self.presentViewController(vc, animated: false, completion: nil)
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

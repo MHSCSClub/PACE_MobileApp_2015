@@ -22,6 +22,7 @@
 		3FBE1CE21AD328E2009030A0 /* MainData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBE1CE11AD328E2009030A0 /* MainData.swift */; };
 		3FC32CEA1AD33AE100432124 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC32CE91AD33AE100432124 /* EventViewController.swift */; };
 		3FEECF6E1AD83E4B00A73F55 /* addEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEECF6D1AD83E4B00A73F55 /* addEventViewController.swift */; };
+		3FF142DC1ADCAB0300C8E5E9 /* FlashcardviewingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF142DB1ADCAB0300C8E5E9 /* FlashcardviewingViewController.swift */; };
 		83F006BD1ADC52B90062D586 /* AddFlashCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F006BC1ADC52B90062D586 /* AddFlashCardsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		3FBE1CE11AD328E2009030A0 /* MainData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainData.swift; sourceTree = "<group>"; };
 		3FC32CE91AD33AE100432124 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		3FEECF6D1AD83E4B00A73F55 /* addEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addEventViewController.swift; sourceTree = "<group>"; };
+		3FF142DB1ADCAB0300C8E5E9 /* FlashcardviewingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashcardviewingViewController.swift; sourceTree = "<group>"; };
 		83F006BC1ADC52B90062D586 /* AddFlashCardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFlashCardsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,6 +103,7 @@
 				3F9972241AC73F2D00EF05C9 /* AppDelegate.swift */,
 				3F9972291AC73F2D00EF05C9 /* ViewController.swift */,
 				3F99722B1AC73F2D00EF05C9 /* Main.storyboard */,
+				3FF142DB1ADCAB0300C8E5E9 /* FlashcardviewingViewController.swift */,
 				3FEECF6D1AD83E4B00A73F55 /* addEventViewController.swift */,
 				3F150A4D1AD9FE0F0004BE83 /* FlashCardViewController.swift */,
 				3F9972471AC7404A00EF05C9 /* calenderPatientView.swift */,
@@ -246,6 +249,7 @@
 				3FBE1CE21AD328E2009030A0 /* MainData.swift in Sources */,
 				3F99722A1AC73F2D00EF05C9 /* ViewController.swift in Sources */,
 				3F9972281AC73F2D00EF05C9 /* Memory_Moments.xcdatamodeld in Sources */,
+				3FF142DC1ADCAB0300C8E5E9 /* FlashcardviewingViewController.swift in Sources */,
 				3F42475F1AD60C9200A0F6EA /* CareGiversViewController.swift in Sources */,
 				3F9972481AC7404A00EF05C9 /* calenderPatientView.swift in Sources */,
 				3F9972251AC73F2D00EF05C9 /* AppDelegate.swift in Sources */,

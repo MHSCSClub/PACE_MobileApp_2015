@@ -9,8 +9,9 @@
 import UIKit
 import Foundation
 class addEventViewController: UIViewController, UIPickerViewDataSource, UITextViewDelegate, UITextFieldDelegate {
-
-    
+    //ID, time, Type, Discribtion, title
+    var event = [(Int(), NSDate(), String(), String(), String())];
+    var currentCards = [Flashcards]()
     @IBOutlet var datePicker: UIDatePicker!
     @IBOutlet var eventTitle: UITextField!
     @IBOutlet var textField: UITextView!
@@ -23,12 +24,23 @@ class addEventViewController: UIViewController, UIPickerViewDataSource, UITextVi
         textField.layer.borderWidth = 1;
         textField.layer.borderColor = UIColor.grayColor().CGColor
         eventTitle.delegate = self;
+        if(event[0].2 == "Reminder"){
+            Type.selectRow(1, inComponent: 0, animated: false)
+        }
+        else{
+            Type.selectRow(0, inComponent: 0, animated: false)
+        }
+        datePicker.date = event[0].1
+        eventTitle.text = event[0].4
+        textField.text = event[0].3
         // Do any additional setup after loading the view.
     }
 
     @IBAction func addFlash(sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("FlashCardViewController") as! UIViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("FlashCardViewController") as! FlashCardViewController
+        vc.currentCards = currentCards;
+        vc.event = [(0, datePicker.date, typeOptions[Type.selectedRowInComponent(0)], textField.text, eventTitle.text)]
         self.presentViewController(vc, animated: false, completion: nil)
     }
     override func didReceiveMemoryWarning() {
@@ -98,7 +110,12 @@ class addEventViewController: UIViewController, UIPickerViewDataSource, UITextVi
         //sets up and makes conection to the database
         var url: NSURL = NSURL(string: "http://aakatz3.asuscomm.com:8085/mobile/createevent.php")!
         var request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
-        var bodyData = "pid=\(pid)&time=\(date)&type=\(typeOptions[Type.selectedRowInComponent(0)])&title=\(eventTitle.text)&description=\(textField.text)&fclen=0"
+        var bodyData = "pid=\(pid)&time=\(date)&type=\(typeOptions[Type.selectedRowInComponent(0)])&title=\(eventTitle.text)&description=\(textField.text)&fclen=\(currentCards.count)"
+        var i:Int = 0;
+        for card in currentCards {
+            bodyData += "&fc\(i)=\(card.fcid)"
+            i++
+        }
         request.HTTPMethod = "POST"
         request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding);
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue())

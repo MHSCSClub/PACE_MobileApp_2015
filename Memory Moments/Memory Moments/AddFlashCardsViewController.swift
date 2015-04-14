@@ -8,14 +8,15 @@
 
 import UIKit
 
-class AddFlashCardsViewController: UIViewController {
+class AddFlashCardsViewController: UIViewController , UITextViewDelegate {
     @IBOutlet weak var InformationBox: UITextView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         InformationBox.layer.borderWidth = 1;
         InformationBox.layer.borderColor = UIColor.grayColor().CGColor
-
+        InformationBox.delegate = self;
+        
         // Do any additional setup after loading the view.
     }
 
@@ -24,6 +25,9 @@ class AddFlashCardsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func keyBoardDown(sender: AnyObject) {
+        InformationBox.resignFirstResponder()
+    }
 
     /*
     // MARK: - Navigation

@@ -57,7 +57,64 @@ class AddFlashCardsViewController: UIViewController , UITextViewDelegate, UIImag
     @IBAction func addFlash(sender: AnyObject) {
         loading.hidden = false;
         loading.startAnimating()
+        let filenames = "picture.jpeg"
+        if let dirs : [String] = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String] {
+            let dir = dirs[0] //documents directory
+            let path = dir.stringByAppendingPathComponent(filenames);
+            let content: NSData = UIImageJPEGRepresentation(imagePerson.image, 1.0)
+            content.writeToFile(path, atomically: true)
+        }
+
+        var url: NSURL = NSURL(string: "http://aakatz3.asuscomm.com:8085/mobile/createflashcard.php")!
+        var imageData :NSData = UIImageJPEGRepresentation(imagePerson.image, 1.0);
+        var request: NSMutableURLRequest?
+        let HTTPMethod: String = "POST"
+        var timeoutInterval: NSTimeInterval = 60
+        var HTTPShouldHandleCookies: Bool = false
+        
+        request = NSMutableURLRequest(URL: url)
+        request!.HTTPMethod = HTTPMethod
+        request!.timeoutInterval = timeoutInterval
+        request!.HTTPShouldHandleCookies = HTTPShouldHandleCookies
+        
+        
+        let boundary = "----------SwIfTeRhTtPrEqUeStBoUnDaRy"
+        let contentType = "multipart/form-data; boundary=\(boundary)"
+        request!.setValue(contentType, forHTTPHeaderField:"Content-Type")
+        var body = NSMutableData();
+        
+        
+        let tempData = NSMutableData()
+        let fileName = filenames
+        let parameterName = "userfile"
+        
+        
+        let mimeType = "application/octet-stream"
+        
+        tempData.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        let fileNameContentDisposition = "filename=\"\(fileName)\""
+        let contentDisposition = "Content-Disposition: form-data; name=\"\(parameterName)\"; \(fileNameContentDisposition)\r\n"
+        tempData.appendData(contentDisposition.dataUsingEncoding(NSUTF8StringEncoding)!)
+        tempData.appendData("Content-Type: \(mimeType)\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        tempData.appendData(imageData)
+        tempData.appendData("\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        
+        body.appendData(tempData)
+        
+        body.appendData("\r\n--\(boundary)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        var bodyData = "pid=\(pid)&time=\(date)&type=\(typeOptions[Type.selectedRowInComponent(0)])&title=\(eventTitle.text)&description=\(textField.text)&fclen=\(currentCards.count)"
+        request!.setValue("\(body.length)", forHTTPHeaderField: "Content-Length")
+        request!.HTTPBody = body
+        
+        
+        
+        var vl_error :NSErrorPointer = nil
+        var responseData  = NSURLConnection.sendSynchronousRequest(request!,returningResponse: nil, error:vl_error)
+        
+        var results = NSString(data:responseData!, encoding:NSUTF8StringEncoding)
+        println("finish \(results)")
     }
+    
     /*
     // MARK: - Navigation
 

@@ -58,67 +58,59 @@ class AddFlashCardsViewController: UIViewController , UITextViewDelegate, UIImag
     @IBAction func addFlash(sender: AnyObject) {
         loading.hidden = false;
         loading.startAnimating()
-        let filenames = "picture.jpeg"
-        var pid: String = "";
-        if let dirs : [String] = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String] {
-            let dir = dirs[0] //documents directory
-            let path = dir.stringByAppendingPathComponent(filenames);
-            let content: NSData = UIImageJPEGRepresentation(imagePerson.image, 1.0)
-            content.writeToFile(path, atomically: true)
-            let path2 = dir.stringByAppendingPathComponent("PID.txt");
+        var c: UInt8 = UInt8();
+        var imageData = UIImagePNGRepresentation(imagePerson.image)
+        var img: NSData = imageData
+        if imageData != nil{
+            var request = NSMutableURLRequest(URL: NSURL(string:"http://aakatz3.asuscomm.com:8085/mobile/createflashcard.php")!)
+            var session = NSURLSession.sharedSession()
             
-            //reading to get the PID of person
-            pid = String(contentsOfFile: path2, encoding: NSUTF8StringEncoding, error: nil)!
+            request.HTTPMethod = "POST"
+            
+            var boundary = NSString(format: "---------------------------14737809831466499882746641449")
+            var contentType = NSString(format: "multipart/form-data; boundary=%@",boundary)
+            //  println("Content Type \(contentType)")
+            request.addValue(contentType as String, forHTTPHeaderField: "Content-Type")
+            
+            var body = NSMutableData.alloc()
+            
+            // Title
+            body.appendData(NSString(format: "\r\n--%@\r\n",boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData(NSString(format:"Content-Disposition: form-data; name=\"pid\"\r\n\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData("3".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!)
+            
+            body.appendData(NSString(format: "\r\n--%@\r\n",boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData(NSString(format:"Content-Disposition: form-data; name=\"name\"\r\n\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData("\(name.text)".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!)
+            
+            body.appendData(NSString(format: "\r\n--%@\r\n",boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData(NSString(format:"Content-Disposition: form-data; name=\"info\"\r\n\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData("\(Info.text)".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!)
+            
+            body.appendData(NSString(format: "\r\n--%@\r\n",boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData(NSString(format:"Content-Disposition: form-data; name=\"description\"\r\n\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData("\(Info.text)".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!)
+            
+            // Image
+            body.appendData(NSString(format: "\r\n--%@\r\n", boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData(NSString(format:"Content-Disposition: form-data; name=\"picture\"; filename=\"img.jpg\"\\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData(NSString(format: "Content-Type: application/octet-stream\r\n\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData(imageData)
+            body.appendData(NSString(format: "\r\n--%@\r\n", boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
+            
+            
+            
+            request.HTTPBody = body
+            
+            
+            var returnData = NSURLConnection.sendSynchronousRequest(request, returningResponse: nil, error: nil)
+            
+            var returnString = NSString(data: returnData!, encoding: NSUTF8StringEncoding)
+            
+            println("returnString \(returnString)")
+            
         }
 
-        var url: NSURL = NSURL(string: "http://aakatz3.asuscomm.com:8085/mobile/createflashcard.php")!
-        var imageData :NSData = UIImageJPEGRepresentation(imagePerson.image, 1.0);
-        var request: NSMutableURLRequest?
-        let HTTPMethod: String = "POST"
-        var timeoutInterval: NSTimeInterval = 60
-        var HTTPShouldHandleCookies: Bool = false
-        
-        request = NSMutableURLRequest(URL: url)
-        request!.HTTPMethod = HTTPMethod
-        request!.timeoutInterval = timeoutInterval
-        request!.HTTPShouldHandleCookies = HTTPShouldHandleCookies
-        
-        
-        let boundary = "----------SwIfTeRhTtPrEqUeStBoUnDaRy"
-        let contentType = "multipart/form-data; boundary=\(boundary)"
-        request!.setValue(contentType, forHTTPHeaderField:"Content-Type")
-        var body = NSMutableData();
-        
-        
-        let tempData = NSMutableData()
-        let fileName = filenames
-        let parameterName = "userfile"
-        
-        
-        let mimeType = "application/octet-stream"
-        
-        tempData.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        let fileNameContentDisposition = "filename=\"\(fileName)\""
-        let contentDisposition = "Content-Disposition: form-data; name=\"\(parameterName)\"; \(fileNameContentDisposition)\r\n"
-        tempData.appendData(contentDisposition.dataUsingEncoding(NSUTF8StringEncoding)!)
-        tempData.appendData("Content-Type: \(mimeType)\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        tempData.appendData(imageData)
-        tempData.appendData("\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        
-        body.appendData("\r\n--\(boundary)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        var bodyData = "pid=\(pid)&name=\(name.text)&info=\(Info.text)&picture="
-        body.appendData(tempData)
-        var bodyy = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
-        request!.setValue("\(body.length)", forHTTPHeaderField: "Content-Length")
-        request!.HTTPBody =  bodyy + body;
-        
-        
-        
-        var vl_error :NSErrorPointer = nil
-        var responseData  = NSURLConnection.sendSynchronousRequest(request!,returningResponse: nil, error:vl_error)
-        
-        var results = NSString(data:responseData!, encoding:NSUTF8StringEncoding)
-        println("finish \(results)")
     }
     
     /*

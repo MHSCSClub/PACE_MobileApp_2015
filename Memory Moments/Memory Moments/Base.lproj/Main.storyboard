@@ -886,10 +886,10 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6YH-DH-YHz">
-                                <rect key="frame" x="16" y="68" width="288" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title: gg" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6YH-DH-YHz">
+                                <rect key="frame" x="16" y="68" width="288" height="33"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="1bw-D9-6q9"/>
+                                    <constraint firstAttribute="height" constant="33" id="1bw-D9-6q9"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -979,7 +979,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="7yJ-vE-s4q" firstAttribute="top" secondItem="6YH-DH-YHz" secondAttribute="bottom" constant="16" id="3Jl-PS-yAg"/>
+                            <constraint firstItem="7yJ-vE-s4q" firstAttribute="top" secondItem="6YH-DH-YHz" secondAttribute="bottom" constant="4" id="3Jl-PS-yAg"/>
                             <constraint firstItem="dGP-A8-lN0" firstAttribute="centerY" secondItem="GTX-5y-oyN" secondAttribute="centerY" id="4po-eb-fG0"/>
                             <constraint firstItem="vDX-jC-VNO" firstAttribute="leading" secondItem="4vv-uD-CKZ" secondAttribute="leading" id="5Zq-sl-Hni"/>
                             <constraint firstItem="3Om-mi-Myc" firstAttribute="leading" secondItem="GTX-5y-oyN" secondAttribute="leading" id="883-dj-VVa"/>

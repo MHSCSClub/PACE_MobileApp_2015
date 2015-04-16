@@ -10,11 +10,16 @@ import UIKit
 import CoreData
 class EventViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet var backButton: UIButton!
     @IBOutlet var name: UILabel!
     @IBOutlet var info: UITextView!
     @IBOutlet var flashView: UIView!
     @IBOutlet var personPic: UIImageView!
-    @IBOutlet var test: UILabel!
+    @IBOutlet var evttitle: UILabel!
+    @IBOutlet var time: UILabel!
+    @IBOutlet var descrition: UILabel!
+    @IBOutlet var infoevent: UITextView!
+    
     var passedData: MainData!;
     var NewEvents = [(Int(), String(), String())];
     var Flash = [Flashcards]()
@@ -31,13 +36,15 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
         let timestamp = NSDateFormatter.localizedStringFromDate(passedData.time, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
         var viewFrame = self.view.frame
         //Sets up the Table View
-        viewFrame.origin.y += 200
-        viewFrame.size.height -= 200;
+        viewFrame.origin.y += 250
+        viewFrame.size.height -= 250;
         logTableView.frame = viewFrame
         logTableView.rowHeight = 90;
         logTableView.scrollEnabled = true;
         // Add the table view to this view controller's view
         self.view.addSubview(logTableView)
+        
+        
         // Here, we tell the table view that we intend to use a cell we're going to call "LogCell"
         logTableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "LogCell")
         
@@ -52,7 +59,10 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
         //label.text = "\(passedData.title)\n \(timestamp) \n \(passedData.descrition)\n \(passedData.type)"
         self.view.addSubview(label);
         // Do any additional setup after loading the view.
-        
+        evttitle.text = "Title: \(passedData.title)"
+        time.text = "Time: \(NSDateFormatter.localizedStringFromDate(passedData.time, dateStyle: .MediumStyle, timeStyle: .ShortStyle))"
+        infoevent.text = passedData.descrition
+        self.view.bringSubviewToFront(infoevent)
         var timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("update"), userInfo: nil, repeats: false)
     }
     @IBAction func EXIT(sender: AnyObject) {

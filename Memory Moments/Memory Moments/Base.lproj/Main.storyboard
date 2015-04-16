@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D130a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -134,29 +135,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Today Is:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qBv-XT-r2z">
-                                <rect key="frame" x="5" y="20" width="116" height="51"/>
-                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="25"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="js6-8H-STU">
-                                <rect key="frame" x="129" y="20" width="175" height="51"/>
-                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="25"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today's Events:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m8c-m1-VOS">
                                 <rect key="frame" x="78" y="228" width="164" height="27"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1eW-Oj-7l0">
+                                <rect key="frame" x="16" y="20" width="288" height="58"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="js6-8H-STU">
+                                        <rect key="frame" x="141" y="3" width="164" height="51"/>
+                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="25"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today Is:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qBv-XT-r2z">
+                                        <rect key="frame" x="26" y="3" width="116" height="51"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="116" id="0EI-eK-m3P"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="25"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="js6-8H-STU" firstAttribute="trailing" secondItem="1eW-Oj-7l0" secondAttribute="trailingMargin" constant="25" id="9w5-au-7Pg"/>
+                                    <constraint firstItem="qBv-XT-r2z" firstAttribute="top" secondItem="1eW-Oj-7l0" secondAttribute="top" constant="3" id="Ghn-bw-PnL"/>
+                                    <constraint firstItem="qBv-XT-r2z" firstAttribute="leading" secondItem="1eW-Oj-7l0" secondAttribute="leading" constant="26" id="KD9-dC-lFG"/>
+                                    <constraint firstAttribute="width" constant="288" id="N6N-AY-kMw"/>
+                                    <constraint firstItem="js6-8H-STU" firstAttribute="baseline" secondItem="qBv-XT-r2z" secondAttribute="baseline" id="XZ2-eo-gGX"/>
+                                    <constraint firstItem="js6-8H-STU" firstAttribute="firstBaseline" secondItem="qBv-XT-r2z" secondAttribute="firstBaseline" id="a86-Sn-YqK"/>
+                                    <constraint firstAttribute="bottom" secondItem="qBv-XT-r2z" secondAttribute="bottom" constant="4" id="atX-by-RNr"/>
+                                    <constraint firstItem="js6-8H-STU" firstAttribute="leading" secondItem="qBv-XT-r2z" secondAttribute="trailing" constant="-1" id="f59-k5-3qf"/>
+                                    <constraint firstAttribute="height" constant="58" id="vwU-TF-Su2"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="m8c-m1-VOS" secondAttribute="centerX" id="31s-c0-uQF"/>
                             <constraint firstItem="m8c-m1-VOS" firstAttribute="top" secondItem="7dK-0K-Pcp" secondAttribute="topMargin" constant="228" id="WmX-Ze-94s"/>
+                            <constraint firstItem="1eW-Oj-7l0" firstAttribute="centerX" secondItem="m8c-m1-VOS" secondAttribute="centerX" id="b5V-5Z-D24"/>
+                            <constraint firstItem="1eW-Oj-7l0" firstAttribute="top" secondItem="BfA-Mc-kk2" secondAttribute="bottom" id="w6s-pq-nLq"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Nbc-gB-zHC"/>

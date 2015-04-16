@@ -103,7 +103,8 @@ class ViewController: UIViewController {
                     }
                     
                     print("\(id) sdlkjfalsdjf");
-                    
+                    let pathFlash = dir.stringByAppendingPathComponent("fcid.txt");
+                    "0".writeToFile(pathFlash, atomically: false, encoding: NSUTF8StringEncoding, error: nil)
                     id.writeToFile(pathID, atomically: false, encoding: NSUTF8StringEncoding, error: nil);
                     //writing that it's complete
                     let text = "YesPas"

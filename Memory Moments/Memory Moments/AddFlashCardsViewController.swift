@@ -41,7 +41,8 @@ class AddFlashCardsViewController: UIViewController , UITextViewDelegate, UIImag
 
     @IBAction func photoFromLibrary(sender: AnyObject) {
         picker.allowsEditing = false
-        picker.sourceType = .PhotoLibrary
+        picker.sourceType = UIImagePickerControllerSourceType.Camera
+        picker.cameraCaptureMode = .Photo
         presentViewController(picker, animated: true, completion: nil)
     }
     //delagates
@@ -58,8 +59,19 @@ class AddFlashCardsViewController: UIViewController , UITextViewDelegate, UIImag
     @IBAction func addFlash(sender: AnyObject) {
         loading.hidden = false;
         loading.startAnimating()
+        var pid: String = "";
+        var path2: String!;
+        if let dirs : [String] = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String] {
+            let dir = dirs[0] //documents directory
+            let path = dir.stringByAppendingPathComponent("PID.txt");
+            path2 = dir.stringByAppendingPathComponent("fcid.txt");
+            
+            //reading to get the PID of person
+            pid = String(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil)!
+            println(pid)
+        }
         var c: UInt8 = UInt8();
-        var imageData = UIImagePNGRepresentation(imagePerson.image)
+        var imageData = UIImageJPEGRepresentation(imagePerson.image, 0.5)
         var img: NSData = imageData
         if imageData != nil{
             var request = NSMutableURLRequest(URL: NSURL(string:"http://aakatz3.asuscomm.com:8085/mobile/createflashcard.php")!)
@@ -77,7 +89,7 @@ class AddFlashCardsViewController: UIViewController , UITextViewDelegate, UIImag
             // Title
             body.appendData(NSString(format: "\r\n--%@\r\n",boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
             body.appendData(NSString(format:"Content-Disposition: form-data; name=\"pid\"\r\n\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
-            body.appendData("3".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!)
+            body.appendData("\(pid)".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!)
             
             body.appendData(NSString(format: "\r\n--%@\r\n",boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
             body.appendData(NSString(format:"Content-Disposition: form-data; name=\"name\"\r\n\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
@@ -107,9 +119,14 @@ class AddFlashCardsViewController: UIViewController , UITextViewDelegate, UIImag
             
             var returnString = NSString(data: returnData!, encoding: NSUTF8StringEncoding)
             
-            println("returnString \(returnString)")
+            println("returnString \(returnString)") 
             
         }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("FlashCardViewController") as! FlashCardViewController
+        vc.currentCards = currentCards;
+        vc.event = event;
+        self.presentViewController(vc, animated: false, completion: nil)
 
     }
     

@@ -33,7 +33,8 @@ class FlashCardViewController: UIViewController, UITableViewDataSource, UITableV
         // Do any additional setup after loading the view.
         var viewFrame = self.view.frame
         //Sets up the Table View
-        viewFrame.origin.y += 200
+        viewFrame.origin.y += 300
+        viewFrame.size.height -= 300;
         logTableView.frame = viewFrame
         logTableView.scrollEnabled = true;
         // Add the table view to this view controller's view
@@ -47,7 +48,7 @@ class FlashCardViewController: UIViewController, UITableViewDataSource, UITableV
         logTableView.delegate = self
         var viewFrame2 = self.view.frame
         viewFrame2.origin.y += 60;
-        viewFrame2.size.height = 100;
+        viewFrame2.size.height = 200;
         currentFlash.frame = viewFrame2
         currentFlash.delegate = self
         currentFlash.dataSource = self
@@ -84,6 +85,7 @@ class FlashCardViewController: UIViewController, UITableViewDataSource, UITableV
             //makes sure that the element has not been brought in already
             if(!used && count(name) > 0){
                 Flashcards.createInManagedObjectContext(self.managedObjectContext!, name: name, fcid: fcid, info: info)
+                getPicture(fcid)
             }
         }
         self.fetchLog()
@@ -215,6 +217,24 @@ class FlashCardViewController: UIViewController, UITableViewDataSource, UITableV
         }
         
     }
+    func getPicture(fcid: Int) {
+        let url = NSURL(string: "http://aakatz3.asuscomm.com:8085/mobile/getpicture.php?fcid=\(fcid)")!
+        var request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
+        request.HTTPMethod = "GET"
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue())
+            {
+                (response, data, error) in
+                println("")
+                if let dirs : [String] = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String] {
+                    let dir = dirs[0] //documents directory
+                    let path = dir.stringByAppendingPathComponent("picture\(fcid).jpg");
+                    data.writeToFile(path, atomically: true)
+                }
+                
+
+        }
+    }
+    
 
     /*
     // MARK: - Navigation

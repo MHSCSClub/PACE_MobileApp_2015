@@ -21,6 +21,11 @@ class FlashcardviewingViewController: UIViewController {
         info.layer.borderColor = UIColor.grayColor().CGColor
         name.text = card.name;
         info.text = card.info
+        if let dirs : [String] = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String] {
+            let dir = dirs[0] //documents directory
+            let path = dir.stringByAppendingPathComponent("picture\(card.fcid).jpg");
+            Image.image = UIImage(named: path)
+        }
         // Do any additional setup after loading the view.
     }
 

@@ -47,8 +47,8 @@ class FlashCardViewController: UIViewController, UITableViewDataSource, UITableV
         logTableView.dataSource = self
         logTableView.delegate = self
         var viewFrame2 = self.view.frame
-        viewFrame2.origin.y += 60;
-        viewFrame2.size.height = 200;
+        viewFrame2.origin.y += 90;
+        viewFrame2.size.height = 160;
         currentFlash.frame = viewFrame2
         currentFlash.delegate = self
         currentFlash.dataSource = self

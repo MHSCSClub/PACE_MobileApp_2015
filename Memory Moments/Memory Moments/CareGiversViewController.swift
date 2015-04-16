@@ -42,8 +42,8 @@ class CareGiversViewController: UIViewController, UITableViewDataSource, UITable
             
             var viewFrame = self.view.frame
             //Sets up the Table View
-            viewFrame.origin.y += 20
-            viewFrame.size.height -= 65;
+            viewFrame.origin.y += 80
+            viewFrame.size.height -= 120;
             logTableView.frame = viewFrame
             logTableView.scrollEnabled = true;
             logTableView.rowHeight = 70;
@@ -157,7 +157,7 @@ class CareGiversViewController: UIViewController, UITableViewDataSource, UITable
         let timestamp = NSDateFormatter.localizedStringFromDate(envents.time, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
         // Set the title of the cell to be the title of the logItem
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-        cell.textLabel?.text = "\(envents.title)\nDate: \(timestamp)"
+        cell.textLabel?.text = "\(envents.title)\n\(timestamp)"
         cell.textLabel?.numberOfLines = 2;
         
         return cell

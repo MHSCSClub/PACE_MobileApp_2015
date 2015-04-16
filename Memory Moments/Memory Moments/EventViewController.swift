@@ -36,13 +36,14 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
         let timestamp = NSDateFormatter.localizedStringFromDate(passedData.time, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
         var viewFrame = self.view.frame
         //Sets up the Table View
-        viewFrame.origin.y += 250
-        viewFrame.size.height -= 250;
+        viewFrame.origin.y += 300
+        viewFrame.size.height -= 300;
         logTableView.frame = viewFrame
         logTableView.rowHeight = 90;
         logTableView.scrollEnabled = true;
         // Add the table view to this view controller's view
         self.view.addSubview(logTableView)
+        personPic.contentMode = .ScaleAspectFit
         
         
         // Here, we tell the table view that we intend to use a cell we're going to call "LogCell"
@@ -59,8 +60,8 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
         //label.text = "\(passedData.title)\n \(timestamp) \n \(passedData.descrition)\n \(passedData.type)"
         self.view.addSubview(label);
         // Do any additional setup after loading the view.
-        evttitle.text = "Title: \(passedData.title)"
-        time.text = "Time: \(NSDateFormatter.localizedStringFromDate(passedData.time, dateStyle: .MediumStyle, timeStyle: .ShortStyle))"
+        evttitle.text = "\(passedData.title)"
+        time.text = "\(NSDateFormatter.localizedStringFromDate(passedData.time, dateStyle: .MediumStyle, timeStyle: .ShortStyle))"
         infoevent.text = passedData.descrition
         self.view.bringSubviewToFront(infoevent)
         var timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("update"), userInfo: nil, repeats: false)
@@ -282,6 +283,30 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
 
+    @IBAction func backAction(sender: AnyObject) {
+        let file = "setUpDone.txt"
+        
+        
+        if let dirs : [String] = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String] {
+            let dir = dirs[0] //documents directory
+            let path = dir.stringByAppendingPathComponent(file);
+            
+            //reading
+            let text2 = String(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil)
+            println(text2)
+            
+            if(text2 == "YesPas"){
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewControllerWithIdentifier("calenderPatientView") as! UIViewController
+                self.presentViewController(vc, animated: false, completion: nil)
+            }
+            else if(text2 == "YesCar"){
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewControllerWithIdentifier("CareGiversViewController") as! UIViewController
+                self.presentViewController(vc, animated: false, completion: nil)
+            }
+        }
+    }
     /*
     // MARK: - Navigation
 

@@ -130,6 +130,14 @@ class AddFlashCardsViewController: UIViewController , UITextViewDelegate, UIImag
 
     }
     
+    @IBOutlet var back: UIButton!
+    @IBAction func backk(sender: AnyObject) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("FlashCardViewController") as! FlashCardViewController
+        vc.currentCards = currentCards;
+        vc.event = event;
+        self.presentViewController(vc, animated: false, completion: nil)
+    }
     /*
     // MARK: - Navigation
 

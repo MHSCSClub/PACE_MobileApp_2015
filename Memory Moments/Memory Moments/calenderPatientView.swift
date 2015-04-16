@@ -186,9 +186,15 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
         
         // Get the LogItem for this index
         let envents = Events[indexPath.row]
-        
+        let dateFormatter = NSDateFormatter()
+        //the "M/d/yy, H:mm" is put together from the Symbol Table
+        dateFormatter.dateFormat = "h:mm a"
+        let dateText = dateFormatter.stringFromDate(envents.time)
+
         // Set the title of the cell to be the title of the logItem
-        cell.textLabel?.text = envents.title
+        cell.textLabel?.text = "\(envents.title)\n\(dateText)"
+        cell.textLabel?.numberOfLines = 2;
+        cell.textLabel?.font = UIFont(name: "HelveticaNeue", size: 20.0)
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         return cell
     }
@@ -217,9 +223,10 @@ class calenderPatientView: UIViewController, UITableViewDataSource, UITableViewD
         //displays the days of week
         for i in 0...6 {
             var days = UILabel(frame: CGRect(x: (CGFloat(i) * screenWidth * CGFloat(0.1428)), y: 90, width: (screenWidth * CGFloat(0.1428)), height: 30))
-            days.layer.borderWidth = 0.5;
+            days.layer.borderWidth = 1;
             days.textAlignment = NSTextAlignment.Center;
-            days.layer.borderColor = UIColor.blackColor().CGColor!;
+            days.backgroundColor = UIColor.lightGrayColor()
+            days.layer.borderColor = UIColor.lightGrayColor().CGColor
             days.text = dayString[i];
             self.view.addSubview(days);
         }

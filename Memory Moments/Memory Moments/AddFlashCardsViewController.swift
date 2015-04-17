@@ -12,6 +12,7 @@ class AddFlashCardsViewController: UIViewController , UITextViewDelegate, UIImag
     //ID, time, Type, Discribtion, title
     var event = [(Int(), NSDate(), String(), String(), String())];
     var currentCards = [Flashcards]()
+    var secondFlashSending = false;
     
     @IBOutlet var name: UITextField!
     @IBOutlet weak var InformationBox: UITextView!
@@ -57,6 +58,13 @@ class AddFlashCardsViewController: UIViewController , UITextViewDelegate, UIImag
         dismissViewControllerAnimated(true, completion: nil)
     }
     @IBAction func addFlash(sender: AnyObject) {
+        if imagePerson.image == nil {
+            let alertController = UIAlertController(title: "Problem", message:
+                "No image added\nPlease add image and try again", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+            return;
+        }
         loading.hidden = false;
         loading.startAnimating()
         var pid: String = "";
@@ -122,21 +130,35 @@ class AddFlashCardsViewController: UIViewController , UITextViewDelegate, UIImag
             println("returnString \(returnString)") 
             
         }
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("FlashCardViewController") as! FlashCardViewController
-        vc.currentCards = currentCards;
-        vc.event = event;
-        self.presentViewController(vc, animated: false, completion: nil)
+        if (secondFlashSending){
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewControllerWithIdentifier("AllFlashViewController") as! AllFlashViewController
+            self.presentViewController(vc, animated: false, completion: nil)
+        }
+        else{
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewControllerWithIdentifier("FlashCardViewController") as! FlashCardViewController
+            vc.currentCards = currentCards;
+            vc.event = event;
+            self.presentViewController(vc, animated: false, completion: nil)
+        }
 
     }
     
     @IBOutlet var back: UIButton!
     @IBAction func backk(sender: AnyObject) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("FlashCardViewController") as! FlashCardViewController
-        vc.currentCards = currentCards;
-        vc.event = event;
-        self.presentViewController(vc, animated: false, completion: nil)
+        if (secondFlashSending){
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewControllerWithIdentifier("AllFlashViewController") as! AllFlashViewController
+            self.presentViewController(vc, animated: false, completion: nil)
+        }
+        else{
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewControllerWithIdentifier("FlashCardViewController") as! FlashCardViewController
+            vc.currentCards = currentCards;
+            vc.event = event;
+            self.presentViewController(vc, animated: false, completion: nil)
+        }
     }
     /*
     // MARK: - Navigation

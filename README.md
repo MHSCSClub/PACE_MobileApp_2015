@@ -1,6 +1,6 @@
 # MHSMobileAppDevBowl2015
-Contains all the php code and ios code. PHP AND SERVER SET UP STUFF
-once you set up the server open the ServerURL class and type in the root URL with all the php files and connection to the database.
+Contains all the php code and ios code.
+
 
 Table information:
 
@@ -52,3 +52,4 @@ Table information:
 	| userid | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
 	| type   | char(50)         | NO   |     | NULL    |                |
 	+--------+------------------+------+-----+---------+----------------+	
+Once you set up the server open the ServerURL class and type in the root URL with all the php files and connection to the database.

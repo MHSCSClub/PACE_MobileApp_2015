@@ -52,4 +52,9 @@ Table information:
 	| userid | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
 	| type   | char(50)         | NO   |     | NULL    |                |
 	+--------+------------------+------+-----+---------+----------------+	
+	
+The name of the database should be `memorymom`, you must also create an administrative user with credentials:
+
+	username: super
+	password: 0x4D4853
 Once you set up the server open the ServerURL class and type in the root URL with all the php files and connection to the database.

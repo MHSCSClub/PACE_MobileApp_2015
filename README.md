@@ -57,4 +57,4 @@ The name of the database should be `memorymom`, you must also create an administ
 
 	username: super
 	password: 0x4D4853
-Once you set up the server open the ServerURL class in the app content and type in the root URL for the server location. 
+Once you set up the server open the `ServerURL` class in the app content and type in the root URL for the server location. 

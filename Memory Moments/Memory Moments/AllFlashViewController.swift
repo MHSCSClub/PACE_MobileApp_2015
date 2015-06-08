@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 class AllFlashViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    var server = ServerURL();
     var Flash = [Flashcards]()
     var NewEvents = [(Int(), String(), String())];
     // Retreive the managedObjectContext from AppDelegate
@@ -134,7 +136,7 @@ class AllFlashViewController: UIViewController, UITableViewDataSource, UITableVi
             println(pid)
         }
         //sets up and makes conection to the database
-        var url: NSURL = NSURL(string: "http://aakatz3.asuscomm.com:8085/mobile/updateflashcard.php")!
+        var url: NSURL = NSURL(string: "\(server.URL)/updateflashcard.php")!
         var request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
         var bodyData = "pid=\(pid)&fcid=\(fcidM)"
         request.HTTPMethod = "POST"
@@ -176,7 +178,7 @@ class AllFlashViewController: UIViewController, UITableViewDataSource, UITableVi
         
     }
     func getPicture(fcid: Int) {
-        let url = NSURL(string: "http://aakatz3.asuscomm.com:8085/mobile/getpicture.php?fcid=\(fcid)")!
+        let url = NSURL(string: "\(server.URL)/getpicture.php?fcid=\(fcid)")!
         var request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
         request.HTTPMethod = "GET"
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue())

@@ -10,6 +10,7 @@ import UIKit
 
 class connect: UIViewController {
 
+    var server = ServerURL();
     @IBOutlet var TextInput: UITextField!
     var cid: String!;
     override func viewDidLoad() {
@@ -33,7 +34,7 @@ class connect: UIViewController {
             let pathDone = dir.stringByAppendingPathComponent(fileC);
             let pathFlash = dir.stringByAppendingPathComponent("fcid.txt");
             var id: String = "";
-            var url: NSURL = NSURL(string: "http://aakatz3.asuscomm.com:8085/mobile/linkpatient.php")!
+            var url: NSURL = NSURL(string: "\(server.URL)/linkpatient.php")!
             var request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
             var bodyData = "pid=\(TextInput.text)&cid=\(cid)"
             request.HTTPMethod = "POST"

@@ -9,6 +9,8 @@
 import UIKit
 import Foundation
 class addEventViewController: UIViewController, UIPickerViewDataSource, UITextViewDelegate, UITextFieldDelegate {
+    
+    var server = ServerURL();
     //ID, time, Type, Discribtion, title
     var event = [(Int(), NSDate(), String(), String(), String())];
     var currentCards = [Flashcards]()
@@ -108,7 +110,7 @@ class addEventViewController: UIViewController, UIPickerViewDataSource, UITextVi
         let date: String = "\(components.year)-\(month)-\(day) \(hour):\(min):00"
         print("Date \(date)")
         //sets up and makes conection to the database
-        var url: NSURL = NSURL(string: "http://aakatz3.asuscomm.com:8085/mobile/createevent.php")!
+        var url: NSURL = NSURL(string: "\(server.URL)/createevent.php")!
         var request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
         var bodyData = "pid=\(pid)&time=\(date)&type=\(typeOptions[Type.selectedRowInComponent(0)])&title=\(eventTitle.text)&description=\(textField.text)&fclen=\(currentCards.count)"
         var i:Int = 0;

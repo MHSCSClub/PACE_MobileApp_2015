@@ -26,6 +26,7 @@
 		3FF142DE1AE1411200C8E5E9 /* AllFlashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF142DD1AE1411200C8E5E9 /* AllFlashViewController.swift */; };
 		3FF142E01AE1453F00C8E5E9 /* flash2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF142DF1AE1453F00C8E5E9 /* flash2ViewController.swift */; };
 		83F006BD1ADC52B90062D586 /* AddFlashCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F006BC1ADC52B90062D586 /* AddFlashCardsViewController.swift */; };
+		9FB9AA5A1B265870006FB39D /* ServerURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB9AA591B265870006FB39D /* ServerURL.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		3FF142DD1AE1411200C8E5E9 /* AllFlashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllFlashViewController.swift; sourceTree = "<group>"; };
 		3FF142DF1AE1453F00C8E5E9 /* flash2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = flash2ViewController.swift; sourceTree = "<group>"; };
 		83F006BC1ADC52B90062D586 /* AddFlashCardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFlashCardsViewController.swift; sourceTree = "<group>"; };
+		9FB9AA591B265870006FB39D /* ServerURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerURL.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				3F9972261AC73F2D00EF05C9 /* Memory_Moments.xcdatamodeld */,
 				3FBE1CE11AD328E2009030A0 /* MainData.swift */,
 				3F150A4F1ADA18570004BE83 /* Flashcards.swift */,
+				9FB9AA591B265870006FB39D /* ServerURL.swift */,
 				3F9972221AC73F2D00EF05C9 /* Supporting Files */,
 			);
 			path = "Memory Moments";
@@ -255,6 +258,7 @@
 				3F99722A1AC73F2D00EF05C9 /* ViewController.swift in Sources */,
 				3FF142E01AE1453F00C8E5E9 /* flash2ViewController.swift in Sources */,
 				3F9972281AC73F2D00EF05C9 /* Memory_Moments.xcdatamodeld in Sources */,
+				9FB9AA5A1B265870006FB39D /* ServerURL.swift in Sources */,
 				3FF142DC1ADCAB0300C8E5E9 /* FlashcardviewingViewController.swift in Sources */,
 				3F42475F1AD60C9200A0F6EA /* CareGiversViewController.swift in Sources */,
 				3F9972481AC7404A00EF05C9 /* calenderPatientView.swift in Sources */,

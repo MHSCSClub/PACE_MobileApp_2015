@@ -9,6 +9,8 @@
 import UIKit
 
 class AddFlashCardsViewController: UIViewController , UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    var server = ServerURL();
+    
     //ID, time, Type, Discribtion, title
     var event = [(Int(), NSDate(), String(), String(), String())];
     var currentCards = [Flashcards]()
@@ -82,7 +84,7 @@ class AddFlashCardsViewController: UIViewController , UITextViewDelegate, UIImag
         var imageData = UIImageJPEGRepresentation(imagePerson.image, 0.5)
         var img: NSData = imageData
         if imageData != nil{
-            var request = NSMutableURLRequest(URL: NSURL(string:"http://aakatz3.asuscomm.com:8085/mobile/createflashcard.php")!)
+            var request = NSMutableURLRequest(URL: NSURL(string:"\(server.URL)/mobile/createflashcard.php")!)
             var session = NSURLSession.sharedSession()
             
             request.HTTPMethod = "POST"

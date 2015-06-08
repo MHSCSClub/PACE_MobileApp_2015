@@ -11,6 +11,8 @@ import CoreData
 import Foundation
 
 class FlashCardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    var server = ServerURL();
     var event = [(Int(), NSDate(), String(), String(), String())];
     var Flash = [Flashcards]()
     var currentCards = [Flashcards]()
@@ -176,7 +178,7 @@ class FlashCardViewController: UIViewController, UITableViewDataSource, UITableV
             println(pid)
         }
         //sets up and makes conection to the database
-        var url: NSURL = NSURL(string: "http://aakatz3.asuscomm.com:8085/mobile/updateflashcard.php")!
+        var url: NSURL = NSURL(string: "\(server.URL)/updateflashcard.php")!
         var request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
         var bodyData = "pid=\(pid)&fcid=\(fcidM)"
         request.HTTPMethod = "POST"

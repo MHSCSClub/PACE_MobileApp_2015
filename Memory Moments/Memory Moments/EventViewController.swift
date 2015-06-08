@@ -20,6 +20,7 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet var descrition: UILabel!
     @IBOutlet var infoevent: UITextView!
     
+    var server = ServerURL();
     var passedData: MainData!;
     var NewEvents = [(Int(), String(), String())];
     var Flash = [Flashcards]()
@@ -189,7 +190,7 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
             println(pid)
         }
         //sets up and makes conection to the database
-        var url: NSURL = NSURL(string: "http://aakatz3.asuscomm.com:8085/mobile/updateflashcard.php")!
+        var url: NSURL = NSURL(string: "\(server.URL)/updateflashcard.php")!
         var request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
         var bodyData = "pid=\(pid)&fcid=\(fcidM)"
         request.HTTPMethod = "POST"
@@ -232,7 +233,7 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
         
     }
     func getPicture(fcid: Int) {
-        let url = NSURL(string: "http://aakatz3.asuscomm.com:8085/mobile/getpicture.php?fcid=\(fcid)")!
+        let url = NSURL(string: "\(server.URL)/getpicture.php?fcid=\(fcid)")!
         var request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
         request.HTTPMethod = "GET"
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue())
@@ -250,7 +251,7 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     func getAttachFlash(){
         //sets up and makes conection to the database
-        var url: NSURL = NSURL(string: "http://aakatz3.asuscomm.com:8085/mobile/getflashcard.php")!
+        var url: NSURL = NSURL(string: "\(server.URL)/getflashcard.php")!
         var request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
         var bodyData = "evtid=\(passedData.evtid)"
         request.HTTPMethod = "POST"

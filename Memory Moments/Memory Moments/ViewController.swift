@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var server = ServerURL();
+    
     @IBOutlet var PatientButton: UIButton!
     @IBOutlet var Question: UILabel!
     @IBOutlet var headForCode: UILabel!
@@ -76,7 +78,7 @@ class ViewController: UIViewController {
             let pathID = dir.stringByAppendingPathComponent(idfile);
             let pathDone = dir.stringByAppendingPathComponent(fileC);
             var id: String = "";
-            var url: NSURL = NSURL(string: "http://aakatz3.asuscomm.com:8085/mobile/createuser.php")!
+            var url: NSURL = NSURL(string: "\(server.URL)/createuser.php")!
             var request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
             var bodyData = "usertype=patient"
             request.HTTPMethod = "POST"
@@ -137,7 +139,7 @@ class ViewController: UIViewController {
             let pathID = dir.stringByAppendingPathComponent(idfile);
             let pathDone = dir.stringByAppendingPathComponent(fileC);
             var id: String = "";
-            var url: NSURL = NSURL(string: "http://aakatz3.asuscomm.com:8085/mobile/createuser.php")!
+            var url: NSURL = NSURL(string: "\(server.URL)/createuser.php")!
             var request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
             var bodyData = "usertype=caretaker"
             request.HTTPMethod = "POST"

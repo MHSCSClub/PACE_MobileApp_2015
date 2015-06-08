@@ -3,6 +3,8 @@ import CoreData
 import Foundation
 
 class CareGiversViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    var server = ServerURL();
     var firsttime: Bool = true;
     var NewEvents = [(Int(), NSDate(), String(), String(), String())];
     var Events = [MainData]()
@@ -203,7 +205,7 @@ class CareGiversViewController: UIViewController, UITableViewDataSource, UITable
             println(pid)
         }
         //sets up and makes conection to the database
-        var url: NSURL = NSURL(string: "http://aakatz3.asuscomm.com:8085/mobile/updateevents.php")!
+        var url: NSURL = NSURL(string: "\(server.URL)/updateevents.php")!
         var request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
         var bodyData = "pid=\(pid)"
         request.HTTPMethod = "POST"

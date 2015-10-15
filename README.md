@@ -1,8 +1,14 @@
-# MHSMobileAppDevBowl2015
-Contains all the php code and ios code.
+# Pace Mobile Application Dev Bowl 2015
 
+### [Competition Link Here](http://www.pace.edu/seidenberg/mobile-app-development-bowl-2016-challenge/2015-challenge)
 
-Table information:
+## Setup:
+
+Repository contains all the php code and ios code. Android App has not yet been complete.
+
+### Backend:
+
+MYSQL Table information:
 
 	calender
 	+-------------+------------------+------+-----+---------+----------------+
@@ -57,4 +63,7 @@ The name of the database should be `memorymom`, you must also create an administ
 
 	username: super
 	password: 0x4D4853
+	
+### IOS:
+
 Once you set up the server open the `ServerURL` class in the app content and type in the root URL for the server location. 
